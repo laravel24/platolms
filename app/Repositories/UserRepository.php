@@ -153,7 +153,7 @@ class UserRepository extends Repository
 	 */
 	public function deleteUser($entityId)
 	{
-		return $this->delete($this->model, $userId);
+		return $this->delete($this->model, $entityId);
 	}
 
 	/**

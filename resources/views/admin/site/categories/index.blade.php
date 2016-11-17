@@ -45,6 +45,8 @@
 
 @section('scripts')
     
+    <!-- #devtodo: Move the script up to gulp/app.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.1.0/sweetalert2.min.js"></script>
     <script>
             var slugify = function(str) {
                 var $slug = '';
@@ -57,6 +59,7 @@
             // SweetAlert -> Send the AJAX Call to Delete the User w/ Confirmation & Error States
             var categories = {!! $categories !!}
             const adminURI = "{!! env('ADMIN_URI') !!}";
+            var csrf = "{!! csrf_token() !!}";
 
             const vm = new Vue({
                 el: '#page-content',
@@ -93,8 +96,8 @@
                             // Send the AJAX that deletes the user
                             var slugifiedTitle = slugify(category);
                             Vue.http.post('/' + adminURI + '/categories', {'title': category, 'slug': slugifiedTitle}).then((response) => {
-                                // Add the button to the row
                                 console.log(response);
+                                // #vuetodo: Add the button to the row
                             }, (response) => {
                                 console.log(response);
                                 // error callback

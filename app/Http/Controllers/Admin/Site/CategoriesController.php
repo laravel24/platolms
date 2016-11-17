@@ -56,6 +56,7 @@ class CategoriesController extends Controller
 	 */
 	public function store(Request $request)
 	{
+
         $validator = $this->validate($request, [
             'title' => 'required',
             'slug' => 'required',
@@ -68,7 +69,7 @@ class CategoriesController extends Controller
 
         } catch(\Exception $exception)
         {
-	        return response()->json(['success' => false]);
+	        return response('There was a problem with this request', 500);
         }
 
         // returns back with success message

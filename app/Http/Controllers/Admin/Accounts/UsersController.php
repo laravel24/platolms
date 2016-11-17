@@ -291,16 +291,17 @@ class UsersController extends Controller
 	 */
 	public function destroy($id)
 	{
+
         try
         {
         	$this->repository->deleteUser($id);
 
         } catch(\Exception $exception)
         {
-	        return response()->json(['success' => false]);
+			return response('There was a problem with this request', 500);
         }
 
-        return response()->json(['success' => true]);
+        return response('Excellent!', 200);
 	}
 
 	/**
@@ -310,8 +311,10 @@ class UsersController extends Controller
 	 */
 	public function deleteMultipleUsers(Request $request)
 	{
+		        return response('Excellent!' . $request->users, 200);
+
         $validator = $this->validate($request, [
-            'users' => 'required|array'
+            'users' => 'required|array',
         ]);
 
         try
@@ -320,10 +323,10 @@ class UsersController extends Controller
 
         } catch(\Exception $exception)
         {
-	        return response()->json(['success' => false]);
+	        return response('There was a problem with this request' . $exception->getMessage(), 500);
         }
 
-        return response()->json(['success' => true]);
+        return response('Excellent!', 200);
 	}	
 
 	/**
@@ -362,7 +365,7 @@ class UsersController extends Controller
 
         } catch(\Exception $exception)
         {
-	        return response()->json(['success' => false]);
+	        return response('There was a problem with this request', 500);
         }
 
         return response()->json(['success' => true, 'returnedUsers' => $returnedUsers]);

@@ -18,7 +18,7 @@ Plato is open-sourced software licensed under the [MIT license](http://opensourc
 - Take another design pass
 
 ### Dev (Admin)
-- Users/Students (@todo: User Tags, Add Role/Tag to Create/Update User, Clean up design on create/update password user views)
+- Users/Students (@todo: Multiple delete, Tags, Create/Update User)
 - Transcripts
 - Courses
  - Courses
@@ -35,9 +35,9 @@ Plato is open-sourced software licensed under the [MIT license](http://opensourc
  - Testing
  - Grading
 - Blogs
- - Categories
+ - Categories (@todo: Add row on addition, Edit, Update, Delete, Delete All)
  - Tags
- - Posts (@todo: Store, Edit, Update, Delete, Delete All, Image, Video)
+ - Posts (@todo: Store, Delete, Delete All, Image, Video)
  - Replies
 - Pages (tbd)
 - Invoices
@@ -83,5 +83,13 @@ Plato is open-sourced software licensed under the [MIT license](http://opensourc
  - User profiles
  - User roles
  - User import via CSV/XLS
+- Notifications
 
 
+### ToDo Tags
+- #uitodo - Unfinished UI work
+- #uxtodo - Unfinished UX work
+- #designtodo - Unfinished Design work
+- #devtodo - Unfinished General Development work
+- #phptodo - Unfinished Laravel/PHP work
+- #vuetodo - Unfinished VueJS work

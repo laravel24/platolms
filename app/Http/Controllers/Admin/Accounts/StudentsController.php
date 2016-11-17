@@ -39,7 +39,7 @@ class StudentsController extends Controller
 		$roles = \App\Models\Role::all();
 		$menuTab = $this->menuTab;
 		$title = 'Students';
-		return response()->view('admin.users.index', compact(['users', 'title', 'roles', 'menuTab']));
+		return response()->view('admin.accounts.users.index', compact(['users', 'title', 'roles', 'menuTab']));
 	}
 
 }

@@ -124,10 +124,10 @@ class AssignmentsController extends Controller
 
         } catch(\Exception $exception)
         {
-	        return response()->json(['success' => false]);
+	        return response('There was a problem with this request', 500);
         }
 
-        return response()->json(['success' => true]);
+        return response('Excellent!', 200);
 	}
 
 }
