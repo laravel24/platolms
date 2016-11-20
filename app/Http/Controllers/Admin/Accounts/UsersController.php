@@ -311,10 +311,10 @@ class UsersController extends Controller
 	 */
 	public function deleteMultipleUsers(Request $request)
 	{
-		        return response('Excellent!' . $request->users, 200);
+		return $request;
 
         $validator = $this->validate($request, [
-            'users' => 'required|array',
+            'users' => 'required',
         ]);
 
         try
@@ -323,7 +323,7 @@ class UsersController extends Controller
 
         } catch(\Exception $exception)
         {
-	        return response('There was a problem with this request' . $exception->getMessage(), 500);
+	        return response('There was a problem with this request', 500);
         }
 
         return response('Excellent!', 200);

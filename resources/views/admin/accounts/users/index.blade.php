@@ -105,6 +105,10 @@
                     name: 'Vue.js',
                     selectedUsers: selectedUsers,
                 },
+                http: {
+                        emulateJSON: true,
+                        emulateHTTP: true
+                },
                 // define methods under the `methods` object
                 methods: {
                     areUsersSelected: function(selectedUsers)
@@ -128,30 +132,31 @@
                             buttonsStyling: false
                         })
                         .then(function() {
-                            // Send the AJAX that deletes the user
-                            Vue.http.post('/' + adminURI + '/users/delete/multiple', {'users': selectedUsers}).then((response) => {
-                                for (var id in selectedUsers)
-                                {
-                                    $('#' + selectedUsers[id]).hide();
-                                }
-                                swal({
-                                    title: 'Archive Complete',
-                                    text: "This users have been archived.",
-                                    type: 'success',
-                                    showCancelButton: false,
-                                    confirmButtonText: 'Got it!',
-                                    confirmButtonClass: 'btn btn-success',
-                                    buttonsStyling: false
-                                })
-                            }, (response) => {
-                                console.log(response);
-                                // error callback
-                                swal(
-                                    'Sorry!',
-                                    'There was an error with your request!',
-                                    'error'
-                                )
-                            });
+                            console.log(selectedUsers);
+                            // // Send the AJAX that deletes the user
+                            // Vue.http.post('/' + adminURI + '/users/delete/multiple', {'users': selectedUsers}).then((response) => {
+                            //     for (var id in selectedUsers)
+                            //     {
+                            //         $('#' + selectedUsers[id]).hide();
+                            //     }
+                            //     swal({
+                            //         title: 'Archive Complete',
+                            //         text: "This users have been archived.",
+                            //         type: 'success',
+                            //         showCancelButton: false,
+                            //         confirmButtonText: 'Got it!',
+                            //         confirmButtonClass: 'btn btn-success',
+                            //         buttonsStyling: false
+                            //     })
+                            // }, (response) => {
+                            //     console.log(response);
+                            //     // error callback
+                            //     swal(
+                            //         'Sorry!',
+                            //         'There was an error with your request!',
+                            //         'error'
+                            //     )
+                            // });
                         }, function(dismiss) {
                             //
                         })
