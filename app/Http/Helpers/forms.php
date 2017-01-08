@@ -11,7 +11,7 @@
 	 *
 	 * @return string
 	 */
-	function makeBaseForm($formField, $name, $label, $default, $placeholder, $required, $errors, $class = '')
+	function makeBaseForm($formField, $name, $label, $errors)
 	{
 		$feedback = $errorClass = '';
 
@@ -24,7 +24,7 @@
 
 		return '
             <div class="form-group '.$errorClass.'">
-		        <label class="control-label" for="'.$name.'">'.$label.'</label><br/>
+		        <label class="control-label" for="'.$name.'">'.$label.'</label>
 		        '.$formField.'
 		        '.$feedback.'
 		    </div>
@@ -39,49 +39,88 @@
 	function makeTextField($name, $label, $default, $placeholder, $required, $errors, $class = '')
 	{
 		$formField = Form::text($name, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
-		return makeBaseForm($formField, $name, $label, $default, $placeholder, $required, $errors, $class = '');
+		return makeBaseForm($formField, $name, $label, $errors);
 	}
 
 	/**
-	 * Create a Text Field
+	 * Create an Email Field
 	 *
 	 * @return string
 	 */
 	function makeEmailField($name, $label, $default, $placeholder, $required, $errors, $class = '')
 	{
 		$formField = Form::email($name, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
-		return makeBaseForm($formField, $name, $label, $default, $placeholder, $required, $errors, $class = '');
+		return makeBaseForm($formField, $name, $label, $errors);
 	}
 
 	/**
-	 * Create a Text Field
+	 * Create a Select Field
+	 *
+	 * @return string
+	 */
+	function makeSelectField($name, $options, $label, $default, $placeholder, $required, $errors, $class = '')
+	{
+		$formField = Form::select($name, $options, $default, [''.$required.'', 'class' => ''.$class.' form-control']);			
+
+		if ($placeholder)
+		{
+			$formField = Form::select($name, $options, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
+		}
+
+		return makeBaseForm($formField, $name, $label, $errors);
+	}
+
+	/**
+	 * Create a Text Area Field
 	 *
 	 * @return string
 	 */
 	function makeTextAreaField($name, $label, $default, $placeholder, $required, $errors, $class = '')
 	{
 		$formField = Form::textarea($name, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
-		return makeBaseForm($formField, $name, $label, $default, $placeholder, $required, $errors, $class = '');
+		return makeBaseForm($formField, $name, $label, $errors);
 	}
 
 	/**
-	 * Create a Text Field
+	 * Create a Password Field
 	 *
 	 * @return string
 	 */
 	function makePasswordField($name, $label, $default, $placeholder, $required, $errors, $class = '')
 	{
 		$formField = Form::password($name, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
-		return makeBaseForm($formField, $name, $label, $default, $placeholder, $required, $errors, $class = '');
+		return makeBaseForm($formField, $name, $label, $errors);
 	}
 
 	/**
-	 * Create a Text Field
+	 * Create an Number Input Field
 	 *
 	 * @return string
 	 */
-	function makeInputField($name, $label, $default, $placeholder, $required, $errors, $class = '')
+	function makeNumberInputField($name, $label, $default, $placeholder, $required, $errors, $class = '')
 	{
-		$formField = Form::email($name, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
-		return makeBaseForm($formField, $name, $label, $default, $placeholder, $required, $errors, $class = '');
+		$formField = Form::number($name, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
+		return makeBaseForm($formField, $name, $label, $errors);
+	}				
+
+	/**
+	 * Create a Radio Field
+	 *
+	 * @return string
+	 */
+	function makeCheckBoxField($name, $label, $value, $checked, $placeholder, $required, $errors, $class = '')
+	{
+		$formField = Form::checkbox($name, $value, $checked, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
+		return makeBaseForm($formField, $name, $label, $errors);
+	}	
+
+	/**
+	 * Create a Radio Field
+	 *
+	 * @return string
+	 */
+	function makeRadioField($name, $label, $value, $checked, $placeholder, $required, $errors, $class = '')
+	{
+		$formField = Form::radio($name, $value, $checked, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
+		return makeBaseForm($formField, $name, $label, $errors);
 	}				

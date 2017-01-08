@@ -98,7 +98,8 @@
 	 * @return string
 	 * @todo -> move this to the user class
 	 */
-	function getUserImage($id, $img, $email, $size='50', $class='thumbnail media-object', $style=''){
+	function getUserImage($id, $img, $email, $size='50', $class='thumbnail media-object', $style='')
+	{
 
 		if ($img)
 		{
