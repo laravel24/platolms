@@ -24,6 +24,7 @@ class MajorsController extends Controller
 	{
 		$this->repository = $majorRepo;
 		$this->menuTab = 'majors';
+		$this->title = 'Major';
 	}
 
 	/**
@@ -33,9 +34,10 @@ class MajorsController extends Controller
 	 */
 	public function index()
 	{
-		$majors = $this->repository->getMajors();
+		$majors = $this->repository->paginateMajors([], 30, false);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.majors.index', compact(['majors', 'menuTab']));
+		$title = $this->title;
+		return response()->view('admin.catalogues.majors.index', compact(['majors', 'menuTab', 'title']));
 	}
 
 	/**
@@ -46,7 +48,10 @@ class MajorsController extends Controller
 	public function create()
 	{
 		$menuTab = $this->menuTab;
-	    return response()->view('admin.majors.create', compact(['menuTab']));
+		$title = $this->title;
+		$colleges = \App\Models\College::get()->pluck('name', 'id');
+		$degreeTypes = \App\Models\Degree::get()->pluck('name', 'id');
+	    return response()->view('admin.catalogues.majors.create', compact(['menuTab', 'title', 'colleges', 'degreeTypes']));
 	}
 
 	/**
@@ -56,8 +61,14 @@ class MajorsController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		dd($request);
         $validator = $this->validate($request, [
-        	//
+        	'name' => 'required',
+        	'slug' => 'required',
+        	'degree_id' => 'required',
+        	'college_id' => 'required',
+        	'hours' => 'required',
+        	'description' => 'required',
         ]);
 
         try
@@ -83,7 +94,7 @@ class MajorsController extends Controller
 	{
 		$major = $this->repository->getMajor($id);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.majors.edit', compact(['major', 'menuTab']));
+		return response()->view('admin.catalogues.majors.edit', compact(['major', 'menuTab']));
 	}
 
 	/**

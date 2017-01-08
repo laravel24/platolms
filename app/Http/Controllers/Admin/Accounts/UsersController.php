@@ -26,6 +26,7 @@ class UsersController extends Controller
 	{
 		$this->repository = $userRepo;
 		$this->menuTab = 'users';
+		$this->title = 'Users';
 	}
 
 	/**
@@ -39,7 +40,7 @@ class UsersController extends Controller
 		$roles = \App\Models\Role::all();
 		// $users = $this->repository->getUsers();
 		$menuTab = $this->menuTab;
-		$title = 'Users';
+		$title = $this->title;
 		return response()->view('admin.accounts.users.index', compact(['users', 'title', 'roles', 'menuTab']));
 	}
 
@@ -55,8 +56,24 @@ class UsersController extends Controller
 		    	})->paginate();
 		$roles = \App\Models\Role::all();
 		$menuTab = 'admins';
-		$title = 'Admins';
-		return response()->view('admin.accounts.users.index', compact(['users', 'title', 'roles', 'menuTab']));
+		$title = $this->title;
+		return response()->view('admin.accounts.users.admins', compact(['users', 'title', 'roles', 'menuTab']));
+	}
+
+	/**
+	 * Show the admin users panel for those admins who are soft deleted
+	 *
+	 * @return Response
+	 */
+	public function archived()
+	{
+		$users = \App\Models\User::onlyTrashed()->whereHas('roles', function($q){
+		        	$q->where('name', '!=', env('STUDENT_LABEL', 'Student'));
+		    	})->paginate();
+		$roles = \App\Models\Role::all();
+		$menuTab = 'admins';
+		$title = $this->title;
+		return response()->view('admin.accounts.users.archived', compact(['users', 'title', 'roles', 'menuTab']));
 	}
 
 	/**
@@ -79,7 +96,8 @@ class UsersController extends Controller
 	public function create()
 	{
 		$menuTab = $this->menuTab;
-	    return response()->view('admin.accounts.users.create', compact(['menuTab']));
+		$roles = \App\Models\Role::all();
+	    return response()->view('admin.accounts.users.create', compact(['menuTab', 'roles']));
 	}
 
 	/**
@@ -93,11 +111,20 @@ class UsersController extends Controller
             'first' => 'required|alpha',
             'last' => 'required|alpha',
             'email' => 'required|email|unique:users',
+            'roles' => 'required',
         ]);
 
         try
         {
+        	$roles = $request['roles'];
+	        unset($request['roles']);
         	$newUser = $this->repository->createUser($request->all());
+
+        	if ($newUser)
+        	{
+				$user = $this->repository->getUser($newUser);
+				$user->roles()->syncWithoutDetaching($roles);
+        	}
 
         } catch(\Exception $exception)
         {
@@ -106,7 +133,7 @@ class UsersController extends Controller
 
         // returns back with success message
         flash()->success('Your user was added!');
-        return redirect()->action('Admin\Accounts\UsersController@index');
+        return redirect()->action('Admin\Accounts\UsersController@admins');
 	}
 
 	/**
@@ -118,7 +145,8 @@ class UsersController extends Controller
 	{
 		$user = $this->repository->getUser($id);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.accounts.users.edit', compact(['user', 'menuTab']));
+		$roles = \App\Models\Role::all();
+		return response()->view('admin.accounts.users.edit', compact(['user', 'menuTab', 'roles']));
 	}
 
 	/**
@@ -132,14 +160,22 @@ class UsersController extends Controller
             'first' => 'required|alpha',
             'last' => 'required|alpha',
             'email' => 'required|email|unique:users,email,'.$id,
-            'address' => 'sometimes|required',
             'address_2' => 'required_with:address',
             'timezone' => 'timezone',
+            'roles' => 'required',
         ]);
 
         try
         {
+        	$roles = $request['roles'];
+	        unset($request['roles']);
         	$updatedUser = $this->repository->updateUser($id, $request->all());
+
+        	if ($updatedUser)
+        	{
+				$user = $this->repository->getUser($id);
+				$user->roles()->syncWithoutDetaching($roles);
+        	}
 
         } catch(\Exception $exception)
         {
@@ -251,11 +287,36 @@ class UsersController extends Controller
 	}
 
 	/**
-	 * Store the newly created user
+	 * Import multiple users
 	 *
 	 * @return Response
 	 */
-	public function addMultipleUsers(UploadFile $upload, InjestFile $injestFile, Request $request)
+	public function addMultipleUsers(Request $request)
+	{
+        $validator = $this->validate($request, [
+            'usersData' => 'required|array'
+        ]);
+
+        try
+        {
+        	$uploadedUsers = $this->repository->createUsers($request->usersData);
+
+        } catch(\Exception $exception)
+        {
+            $this->flashErrorAndReturnWithMessage($exception);
+        }
+
+        // returns back with success message
+        flash()->success($uploadedUsers->count() . ' users were added.');
+        return redirect()->action('Admin\Accounts\UsersController@index');
+	}
+
+	/**
+	 * Process the file upload and then show the user the data before importing
+	 *
+	 * @return Response
+	 */
+	public function processFileUpload(UploadFile $upload, InjestFile $injestFile, Request $request)
 	{
         $validator = $this->validate($request, [
             'file' => 'required|mimes:csv,txt,xls'
@@ -272,16 +333,21 @@ class UsersController extends Controller
 	            $this->flashErrorAndReturnWithMessage($exception);
 			}
 
-        	$uploadedUsers = $this->repository->createUsers($usersData);
-
         } catch(\Exception $exception)
         {
             $this->flashErrorAndReturnWithMessage($exception);
         }
 
         // returns back with success message
-        flash()->success($uploadedUsers->count() . ' users were added.');
-        return redirect()->action('Admin\Accounts\UsersController@index');
+		$menuTab = $this->menuTab;
+		$title = 'students';
+        if (isset($request->type))
+        {
+        	$title = $request->type;
+        }
+        flash()->success(count($usersData) . ' ' . $title . '  were found.');
+		return response()->view('admin.accounts.users.import', compact(['menuTab', 'usersData', 'title']));
+
 	}
 
 	/**
@@ -311,8 +377,6 @@ class UsersController extends Controller
 	 */
 	public function deleteMultipleUsers(Request $request)
 	{
-		return $request;
-
         $validator = $this->validate($request, [
             'users' => 'required',
         ]);
