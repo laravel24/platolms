@@ -49,7 +49,7 @@
                                     <td class="text-right" style="padding-top: 15px;">
                                         <a href="{{ route('admin.majors.show', $major->id) }}" class="btn btn-success btn-sm"><i class="fa fa-globe"></i></a>
                                         <a href="{{ route('admin.majors.edit', $major->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-                                        <a class="btn btn-danger btn-sm" @click.prevent="confirmDelete({!! $majors->id !!}, $event)"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-danger btn-sm" @click.prevent="confirmDelete({!! $major->id !!}, $event)"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
 
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="{{ getColumns(6) }} text-right plato-pagination">
+                    <div class="{{ getColumns(12) }} text-right plato-pagination">
                         {{ $majors->links() }}
                     </div>
                 </div>

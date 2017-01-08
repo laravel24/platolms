@@ -17,11 +17,11 @@ class CreateMajorsTable extends Migration
 		Schema::create('majors', function(Blueprint $table)
 		{
 			$table->increments('id')->unsigned();
-            $table->integer('catalogue_id')->unsigned();
+            $table->integer('catalogue_id')->unsigned()->nullable();
             $table->integer('degree_id')->unsigned();
             $table->integer('college_id')->unsigned();
-            $table->integer('concentration_id')->unsigned();
-            $table->integer('plan_id')->unsigned();
+            $table->integer('concentration_id')->unsigned()->nullable();
+            $table->integer('plan_id')->unsigned()->nullable();
             $table->integer('contact_id')->unsigned()->nullable();
             $table->string('name')->unique();
             $table->string('slug')->unique();

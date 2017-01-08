@@ -61,7 +61,6 @@ class MajorsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		dd($request);
         $validator = $this->validate($request, [
         	'name' => 'required',
         	'slug' => 'required',
@@ -90,11 +89,13 @@ class MajorsController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($majorId)
 	{
-		$major = $this->repository->getMajor($id);
+		$major = $this->repository->getMajor($majorId);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.catalogues.majors.edit', compact(['major', 'menuTab']));
+		$colleges = \App\Models\College::get()->pluck('name', 'id');
+		$degreeTypes = \App\Models\Degree::get()->pluck('name', 'id');
+		return response()->view('admin.catalogues.majors.edit', compact(['major', 'menuTab', 'colleges', 'degreeTypes']));
 	}
 
 	/**
@@ -105,7 +106,12 @@ class MajorsController extends Controller
 	public function update(Request $request, $id)
 	{
         $validator = $this->validate($request, [
-        	//
+        	'name' => 'required',
+        	'slug' => 'required',
+        	'degree_id' => 'required',
+        	'college_id' => 'required',
+        	'hours' => 'required',
+        	'description' => 'required',
         ]);
 
         try
@@ -119,7 +125,7 @@ class MajorsController extends Controller
 
         // returns back with success message
         flash()->success('The major was updated!');
-        return redirect()->action('Admin\Catalogue\MajorController@edit', ['major' => $id]);
+        return redirect()->action('Admin\Catalogue\MajorsController@edit', ['major' => $id]);
 	}
 
 	/**
