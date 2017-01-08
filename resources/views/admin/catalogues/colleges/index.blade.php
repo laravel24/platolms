@@ -1,26 +1,15 @@
 @extends('layouts.app')
 
-@section('styles')
-<style>
-    /*#majors-table { margin-bottom:20px; }
-    #majors-table_length, #majors-table_info { padding-left:8px; }
-    #majors-table_filter, #majors-table_paginate { padding-right:8px; }*/
-</style>
-@endsection
-
 @section('content')
     <div class="primary-content" id="page-content">
-        <h2 class="page-header mb30">All {{ $title }}s
+        <h2 class="page-header mb30">All Colleges
             <span class="pull-right">
                 <small>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                           <a href="{{ route('admin.majors.archived') }}"><i class="fa fa-user"></i> &nbsp; Archived {{ $title }}s</a>
+                           <a href="{{ route('admin.colleges.archived') }}"><i class="fa fa-user"></i> &nbsp; Archived Colleges</a>
                     </span>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                            <a href="{{ route('admin.majors.create') }}"><i class="fa fa-user"></i> &nbsp; New {{ $title }}</a>
-                    </span>
-                    <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                            <a href="{{ route('admin.majors.import', strtolower($title)) }}"><i class="fa fa-upload"></i> &nbsp; Import {{ $title }}</a>
+                            <a href="{{ route('admin.colleges.create') }}"><i class="fa fa-user"></i> &nbsp; New College</a>
                     </span>
                 </small>
             </span>
@@ -28,11 +17,11 @@
 
         @include('layouts.partials.flash')      
 
-        @if (count($majors) > 0)
+        @if (count($colleges) > 0)
 
             <div class="content-box">      
                 <div class="table-responsive">
-                    <table id="majors-table" class="table table-striped">
+                    <table id="colleges-table" class="table table-striped">
                         <thead>
                             <tr>
                                 <th></th>
@@ -40,16 +29,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($majors as $major)
+                            @foreach ($colleges as $college)
 
-                                <tr id="{{ $major->id }}">
+                                <tr id="{{ $college->id }}">
                                     <td>
-                                        <a href="{{ route('admin.majors.show', $major->id) }}">{{ $major->name }}</a>
+                                        <a href="{{ route('admin.colleges.show', $college->id) }}">{{ $college->name }}</a>
                                     </td>
                                     <td class="text-right" style="padding-top: 15px;">
-                                        <a href="{{ route('admin.majors.show', $major->id) }}" class="btn btn-success btn-sm"><i class="fa fa-globe"></i></a>
-                                        <a href="{{ route('admin.majors.edit', $major->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-                                        <a class="btn btn-danger btn-sm" @click.prevent="confirmDelete({!! $majors->id !!}, $event)"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('admin.colleges.show', $college->id) }}" class="btn btn-success btn-sm"><i class="fa fa-globe"></i></a>
+                                        <a href="{{ route('admin.colleges.edit', $college->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-sm" @click.prevent="confirmDelete({!! $college->id !!}, $event)"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
 
@@ -57,18 +46,12 @@
                         </tbody>
                     </table>
                 </div>
-
-                <div class="row">
-                    <div class="{{ getColumns(6) }} text-right plato-pagination">
-                        {{ $majors->links() }}
-                    </div>
-                </div>
             </div>
 
         @else
 
             <div>
-                <p>You have no majors added at this time.</p>
+                <p>You have no colleges added at this time.</p>
             </div>
 
         @endif
@@ -99,7 +82,7 @@
                     {
                         swal({
                             title: 'Are you sure?',
-                            text: "The major will be archived and any associated data for the current cataloge along with it!",
+                            text: "The college will be archived and any associated data for the current cataloge along with it!",
                             type: 'warning',
                             showCancelButton: true,
                             confirmButtonText: 'Yes, archive it!',
@@ -110,12 +93,12 @@
                         })
                         .then(function() {
                             // Send the AJAX that deletes the user
-                            Vue.http.delete('/' + adminURI + '/majors/' + id, {}).then((response) => {
+                            Vue.http.delete('/' + adminURI + '/colleges/' + id, {}).then((response) => {
                                 $('#' + id).hide();
                                 console.log(response);
                                 swal({
                                     title: 'Archive Complete',
-                                    text: "This major has been archived.",
+                                    text: "This college has been archived.",
                                     type: 'success',
                                     showCancelButton: false,
                                     confirmButtonText: 'Got it!',

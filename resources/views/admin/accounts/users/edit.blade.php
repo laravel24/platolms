@@ -28,7 +28,16 @@
                             </div>
 
                             {!! makeEmailField('email', 'Email', $user->email, '', 'required', $errors) !!}
-    
+
+                            <div class="row">
+                                @foreach ($roles as $role)
+                                    <div style="margin-left:15px;float:left;">
+                                        <input type="checkbox" id="{{ $role->name }}" name="roles[]" value="{{ $role->id }}" @if($user->roles->contains($role->id)) checked @endif>
+                                        <label for="{{ $role->name }}">{{ $role->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+
                             <h4 class="mb30 text-warning text-sub-header-color" style="margin-top:60px">Extended Profile Information</h4>
 
                             {!! makeTextAreaField('bio', 'Tell your community a little about yourself', $user->bio, '', 'not-required', $errors) !!}
@@ -105,3 +114,4 @@
         </div>
     </div>
 @endsection
+

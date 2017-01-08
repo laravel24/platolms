@@ -26,13 +26,20 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		// Roles
 		Route::resource('roles', 'RolesController');
 		// Students
+		Route::get('/students/search', 'StudentsController@search')->name('students.search');
+		Route::get('/students/archived', 'StudentsController@archived')->name('students.archived');
+		Route::post('/students/search', 'StudentsController@searchResults')->name('students.search.results');
 		Route::resource('students', 'StudentsController');
 		// Transcripts
 		Route::resource('transcripts', 'TranscriptsController');
 		// Users
 		Route::get('/admins', 'UsersController@admins')->name('admins.index');
-		Route::get('/users/import/{type}', 'UsersController@importUsers')->name('users.import');
-		Route::post('/users/import', 'UsersController@addMultipleUsers')->name('users.upload.multiple');
+		Route::get('/admins/search', 'UsersController@search')->name('users.search');
+		Route::get('/admins/archived', 'UsersController@archived')->name('users.archived');
+		Route::get('/users/import', 'UsersController@importUsers')->name('users.import');
+		Route::post('/users/import', 'UsersController@processFileUpload')->name('users.process.import');
+		Route::post('/users/uploadmultiple', 'UsersController@addMultipleUsers')->name('users.upload.multiple');
+		Route::post('/users/search', 'UsersController@searchResults')->name('users.search.results');
 		Route::get('/users/{user}/authentication', 'UsersController@editAuth')->name('users.edit.auth');
 		Route::post('/users/{user}/authentication', 'UsersController@updateAuth')->name('users.update.auth');
 		Route::post('/users/{user}/avatar', 'UsersController@updateAvatar')->name('users.update.avatar');
@@ -57,15 +64,30 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		Route::resource('tags', 'TagsController');
 	});
 
-	// Catalogue
+	// Degree Programs
 	Route::group(['namespace' => 'Catalogue', 'as' => 'admin.'], function () 
 	{
+		// Colleges
+		Route::get('/colleges/archived', 'CollegesController@archived')->name('colleges.archived');
+		Route::resource('colleges', 'CollegesController');
 		// Catalogues
 		Route::resource('catalogues', 'CataloguesController');
+		// Degrees
+		Route::get('/degrees/archived', 'DegreesController@archived')->name('degrees.archived');
+		Route::resource('degrees', 'DegreesController');
 		// Majors
+		Route::get('/majors/archived', 'MajorsController@archived')->name('majors.archived');
+		Route::get('/majors/import', 'MajorsController@importMajors')->name('majors.import');
+		Route::post('/majors/import', 'MajorsController@addMultipleMajors')->name('majors.upload.multiple');
 		Route::resource('majors', 'MajorsController');
 		// Majors
 		Route::resource('minors', 'MinorsController');
+		// Minors
+		Route::resource('minors', 'MinorsController');
+		// Concentrations
+		Route::resource('concentrations', 'ConcentrationsController');
+		// Plans
+		Route::resource('plans', 'PlansController');
 		// Semesters
 		Route::resource('semesters', 'SemestersController');
 	});

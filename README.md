@@ -18,7 +18,7 @@ Plato is open-sourced software licensed under the [MIT license](http://opensourc
 - Take another design pass
 
 ### Dev (Admin)
-- Users/Students (@todo: Multiple delete, Tags, Create/Update User)
+- Users/Students (@todo: Multiple delete, Tags, Create/Update User, Display Name)
 - Transcripts
 - Courses
  - Courses

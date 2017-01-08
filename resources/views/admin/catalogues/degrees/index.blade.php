@@ -1,26 +1,15 @@
 @extends('layouts.app')
 
-@section('styles')
-<style>
-    /*#majors-table { margin-bottom:20px; }
-    #majors-table_length, #majors-table_info { padding-left:8px; }
-    #majors-table_filter, #majors-table_paginate { padding-right:8px; }*/
-</style>
-@endsection
-
 @section('content')
     <div class="primary-content" id="page-content">
-        <h2 class="page-header mb30">All {{ $title }}s
+        <h2 class="page-header mb30">All Degrees
             <span class="pull-right">
                 <small>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                           <a href="{{ route('admin.majors.archived') }}"><i class="fa fa-user"></i> &nbsp; Archived {{ $title }}s</a>
+                           <a href="{{ route('admin.degrees.archived') }}"><i class="fa fa-user"></i> &nbsp; Archived Degrees</a>
                     </span>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                            <a href="{{ route('admin.majors.create') }}"><i class="fa fa-user"></i> &nbsp; New {{ $title }}</a>
-                    </span>
-                    <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                            <a href="{{ route('admin.majors.import', strtolower($title)) }}"><i class="fa fa-upload"></i> &nbsp; Import {{ $title }}</a>
+                            <a href="{{ route('admin.degrees.create') }}"><i class="fa fa-user"></i> &nbsp; New Degree</a>
                     </span>
                 </small>
             </span>
@@ -28,11 +17,11 @@
 
         @include('layouts.partials.flash')      
 
-        @if (count($majors) > 0)
+        @if (count($degrees) > 0)
 
             <div class="content-box">      
                 <div class="table-responsive">
-                    <table id="majors-table" class="table table-striped">
+                    <table id="degrees-table" class="table table-striped">
                         <thead>
                             <tr>
                                 <th></th>
@@ -40,16 +29,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($majors as $major)
+                            @foreach ($degrees as $degree)
 
-                                <tr id="{{ $major->id }}">
+                                <tr id="{{ $degree->id }}">
                                     <td>
-                                        <a href="{{ route('admin.majors.show', $major->id) }}">{{ $major->name }}</a>
+                                        <a href="{{ route('admin.degrees.show', $degree->id) }}">{{ $degree->name }}</a>
                                     </td>
                                     <td class="text-right" style="padding-top: 15px;">
-                                        <a href="{{ route('admin.majors.show', $major->id) }}" class="btn btn-success btn-sm"><i class="fa fa-globe"></i></a>
-                                        <a href="{{ route('admin.majors.edit', $major->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-                                        <a class="btn btn-danger btn-sm" @click.prevent="confirmDelete({!! $majors->id !!}, $event)"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('admin.degrees.show', $degree->id) }}" class="btn btn-success btn-sm"><i class="fa fa-globe"></i></a>
+                                        <a href="{{ route('admin.degrees.edit', $degree->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-sm" @click.prevent="confirmDelete({!! $degree->id !!}, $event)"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
 
@@ -57,18 +46,12 @@
                         </tbody>
                     </table>
                 </div>
-
-                <div class="row">
-                    <div class="{{ getColumns(6) }} text-right plato-pagination">
-                        {{ $majors->links() }}
-                    </div>
-                </div>
             </div>
 
         @else
 
             <div>
-                <p>You have no majors added at this time.</p>
+                <p>You have no degrees added at this time.</p>
             </div>
 
         @endif
@@ -99,7 +82,7 @@
                     {
                         swal({
                             title: 'Are you sure?',
-                            text: "The major will be archived and any associated data for the current cataloge along with it!",
+                            text: "The degree will be archived and any associated data for the current cataloge along with it!",
                             type: 'warning',
                             showCancelButton: true,
                             confirmButtonText: 'Yes, archive it!',
@@ -110,12 +93,12 @@
                         })
                         .then(function() {
                             // Send the AJAX that deletes the user
-                            Vue.http.delete('/' + adminURI + '/majors/' + id, {}).then((response) => {
+                            Vue.http.delete('/' + adminURI + '/degrees/' + id, {}).then((response) => {
                                 $('#' + id).hide();
                                 console.log(response);
                                 swal({
                                     title: 'Archive Complete',
-                                    text: "This major has been archived.",
+                                    text: "This degree has been archived.",
                                     type: 'success',
                                     showCancelButton: false,
                                     confirmButtonText: 'Got it!',

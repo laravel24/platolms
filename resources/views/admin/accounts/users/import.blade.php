@@ -3,7 +3,7 @@
 @section('content')
     <div class="primary-content">
         <div class="">
-            <h2 class="page-header mb30">Import Users</h2>
+            <h2 class="page-header mb30">Import {!! ucwords($title) !!}</h2>
         </div>
 
         @include('layouts.partials.flash')      
@@ -13,15 +13,34 @@
             {!! Form::open(['route' => ['admin.users.upload.multiple'], 'id' => 'form', 'method' => 'post', 'files' => 'true']) !!}
 
                 <div class="row">
-                    <div class="{{ getColumns(4) }}">
-                        <div class="form-group @if ($errors->has('file')) has-error has-feedback @endif">
-                            <label class="control-label" for="avatar">Upload File</label><br/>
-                                {!! Form::file('file') !!}
-                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                            <span id="inputError2Status" class="sr-only">(error)</span>
-                        </div>
+                    @if(count($usersData) > 0)
 
+                        <div class="col-md-12">
+                            <?php $i = 1; ?>
+                                @foreach ($usersData as $key => $userArray)
+                                    @if ($i < 6)
+                                        <div class="row" style="margin-bottom:20px;border-bottom:1px solid #ececec;padding-bottom:20px;">
+                                            @foreach ($userArray as $importField => $importValue)
+                                                <div class="col-md-1">
+                                                    @if ($i ==1) <strong>{!! ucwords($importField) !!}</strong><br/> @endif
+                                                    <input type="" name="" value="{!! $importValue !!}">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                    <?php $i++; ?>
+                                @endforeach
+                            @endif
+                        </div>
+                        <input type="hidden" value="{{$title}}" name="type">
                         {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
+
+                    @else
+
+                        <p>Sorry, there were no {!! $title !!} found.</p>
+
+                    @endif
+
 
                     </div>
                 </div>
