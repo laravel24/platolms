@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-class ArticleRepository extends Repository
+class DegreeRepository extends Repository
 {
 
 	/**
@@ -10,8 +10,8 @@ class ArticleRepository extends Repository
 	 */
 	public function __construct()
 	{
-		$this->table = 'articles';
-		$this->model = 'App\Models\Article';
+		$this->table = 'degrees';
+		$this->model = 'App\Models\Degree';
 	}
 
 	/**
@@ -20,7 +20,7 @@ class ArticleRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function getArticle($entityIdOrIds)
+	public function getDegree($entityIdOrIds)
 	{
 		return $this->find($this->model, $entityIdOrIds);
 	}
@@ -31,7 +31,7 @@ class ArticleRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function getArticleBy($field, $value)
+	public function getDegreeBy($field, $value)
 	{
 		return $this->findOneBy($this->model, $field, $value);
 	}
@@ -42,9 +42,9 @@ class ArticleRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function getArticlesByIds(array $entityIds = null)
+	public function getDegreesByIds(array $entityIds = null)
 	{
-		return $this->getArticle($entityIds);
+		return $this->getDegree($entityIds);
 	}
 
 	/**
@@ -53,9 +53,9 @@ class ArticleRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function getArticles(array $scopes = [])
+	public function getDegrees(array $scopes = [])
 	{
-		return $this->findAllBy($this->table, $scopes);
+		return $this->findAllBy($this->model, $scopes);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class ArticleRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function paginateArticles(array $scopes, $limit = 15, $withTrashed = false)
+	public function paginateDegrees(array $scopes, $limit = 15, $withTrashed = false)
 	{
 		return $this->paginate($this->model, $scopes, $limit, $withTrashed);
 	}
@@ -75,7 +75,7 @@ class ArticleRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function createArticle(array $entityData)
+	public function createDegree(array $entityData)
 	{
 		return $this->create($this->table, $entityData);
 	}
@@ -86,7 +86,7 @@ class ArticleRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function updateArticle($entityId, array $entityData)
+	public function updateDegree($entityId, array $entityData)
 	{
 		return $this->update($this->model, $entityId, $entityData);
 	}
@@ -97,27 +97,9 @@ class ArticleRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function deleteArticle($entityId)
+	public function deleteDegree($entityId)
 	{
 		return $this->delete($this->model, $entityId);
-	}
-
-	/**
-	 * Delete multiple entities.
-	 *
-	 * @param  array  $data
-	 * @return \Illuminate\Contracts\Validation\Validator
-	 */
-	public function deleteArticles(array $entityIds)
-	{
-		$deletedPosts = [];
-		foreach ($entityIds as $entityId)
-		{
-			$deletedPost = $this->deleteUser($entityId);
-			array_push($deletedPosts, $deletedPost);
-		}
-
-		return $deletedPosts;
 	}
 
 }

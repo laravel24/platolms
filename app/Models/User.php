@@ -61,4 +61,19 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Role', 'roles_users')->orderBy('id')->first();
     }
 
+    /**
+     * Get the roles that a user belongs to in a string
+     */
+    public function getRolesNames()
+    {
+        $returnedRoles = [];
+        $roles = $this->belongsToMany('App\Models\Role', 'roles_users')->orderBy('id')->get();
+        foreach ($roles as $role)
+        {
+            $returnedRoles[] = $role->name;
+        }
+
+        return implode(',', $returnedRoles);
+    }
+
 }

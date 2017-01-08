@@ -10,11 +10,16 @@
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
+    $firstName = $faker->firstName;
+    $lastName = $faker->lastName;
+    $display = $firstName . ' ' . $lastName;
+
     return [
-        'email' => $faker->safeEmail,
+        'email' => $display . '@bobmail.info',
         'password' => $password ?: $password = bcrypt('secret'),
-        'first' => $faker->firstName,
-        'last' => $faker->lastName,
+        'first' => $firstName,
+        'last' => $lastName,
+        'display_name' => $display,
         'bio' => $faker->text,
         'img' => $faker->imageUrl(200, 200, 'people', true, 'PlatoLMS', true),
         'question' => $faker->sentence,

@@ -55,7 +55,7 @@ class MajorRepository extends Repository
 	 */
 	public function getMajors(array $scopes = [])
 	{
-		return $this->findAllBy($this->table, $scopes);
+		return $this->findAll($this->model, $scopes);
 	}
 
 	/**

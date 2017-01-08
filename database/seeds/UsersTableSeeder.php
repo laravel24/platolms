@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('snuffles'),
             'first' => 'Jason',
             'last' => 'Herndon',
+            'display_name' => 'Jason Herndon',
             'bio' => 'Developer. Writer. Storyteller. Backpacker.',
             'img' => 'https://pbs.twimg.com/profile_images/735287189601452032/Amstvgi5_400x400.jpg',
             'question' => 'What city were you born in?',

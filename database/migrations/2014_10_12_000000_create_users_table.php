@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
 			$table->string('password', 60);
             $table->string('first');
             $table->string('last');
+            $table->string('display_name')->nullable();
             $table->mediumText('bio')->nullable();
             $table->text('img')->nullable();
             $table->string('question')->nullable();
@@ -28,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('address_2')->nullable();
             $table->string('city')->nullable();
-            $table->integer('postal')->nullable();
+            $table->string('postal')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('timezone')->nullable();
