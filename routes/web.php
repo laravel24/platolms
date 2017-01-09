@@ -83,8 +83,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		Route::resource('minors', 'MinorsController');
 		// Minors
 		Route::resource('minors', 'MinorsController');
-		// Concentrations
-		Route::resource('concentrations', 'ConcentrationsController');
 		// Plans
 		Route::resource('plans', 'PlansController');
 		// Semesters

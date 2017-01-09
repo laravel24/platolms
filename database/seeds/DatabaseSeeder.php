@@ -18,7 +18,12 @@ class DatabaseSeeder extends Seeder
 
         // FE Site
 
-        // Courses
+        // Degree Programs
+        $this->call(CollegesTableSeeder::class);
+        $this->call(DegreesTableSeeder::class);
+        $this->call(MajorsTableSeeder::class);
+        $this->call(MinorsTableSeeder::class);
+        $this->call(MajorsMinorsTableSeeder::class);
 
     }
 }

@@ -37,4 +37,11 @@ class Major extends Model
      */
     protected $dates = [];
 
+    /**
+     * Get the minors that belong to a major
+     */
+    public function minors()
+    {
+        return $this->belongsToMany('App\Models\Minor', 'majors_minors');
+    }
 }

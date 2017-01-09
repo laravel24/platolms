@@ -16,11 +16,13 @@ class CreateCoursesTable extends Migration
 	{
 		Schema::create('courses', function(Blueprint $table)
 		{
-			$table->increments('id')->unsigned();
+			$table->increments('id')->unsigned();			
             $table->mediumInteger('revision_id')->unsigned();
             $table->string('title');
             $table->string('sub_title')->nullable();
             $table->text('img')->nullable();
+            $table->boolean('online')->nullable()->default(false);
+            $table->text('options')->nullable();
             $table->softDeletes();
 			$table->timestamps();        
         });

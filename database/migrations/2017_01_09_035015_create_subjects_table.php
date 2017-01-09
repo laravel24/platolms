@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConcentrationsTable extends Migration
+class CreateSubjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateConcentrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('concentrations', function(Blueprint $table)
+        Schema::create('subjects', function(Blueprint $table)
         {
             $table->increments('id')->unsigned();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->text('description');
+            $table->string('name');
+            $table->string('slug');
             $table->softDeletes();
             $table->timestamps();        
         });
@@ -31,6 +30,6 @@ class CreateConcentrationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('concentrations');
+        Schema::drop('subjects');
     }
 }

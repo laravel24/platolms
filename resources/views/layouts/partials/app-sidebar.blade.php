@@ -20,7 +20,6 @@
         <a href="{{ route('admin.majors.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'majors')) active @endif">Majors</a>
         <a href="{{ route('admin.minors.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'minors')) active @endif">Minors</a>
         <a href="{{ route('admin.catalogues.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'catalogues')) active @endif">Catalogues</a>
-        <a href="{{ route('admin.concentrations.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'concentrations')) active @endif">Concentrations</a>
         <a href="{{ route('admin.plans.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'plans')) active @endif">Plans</a>
         <a href="{{ route('admin.semesters.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'semesters')) active @endif">Semesters</a>
     </div>
