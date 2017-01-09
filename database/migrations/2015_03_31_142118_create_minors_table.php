@@ -17,8 +17,12 @@ class CreateMinorsTable extends Migration
 		Schema::create('minors', function(Blueprint $table)
 		{
 			$table->increments('id')->unsigned();
+            $table->integer('contact_id')->unsigned()->nullable();
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->integer('hours')->unsigned()->nullable();
+            $table->text('description');
+            $table->text('options')->nullable();
 			$table->softDeletes();
 			$table->timestamps();        
         });

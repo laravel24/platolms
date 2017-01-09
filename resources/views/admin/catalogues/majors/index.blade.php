@@ -19,9 +19,6 @@
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
                             <a href="{{ route('admin.majors.create') }}"><i class="fa fa-user"></i> &nbsp; New {{ $title }}</a>
                     </span>
-                    <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                            <a href="{{ route('admin.majors.import', strtolower($title)) }}"><i class="fa fa-upload"></i> &nbsp; Import {{ $title }}</a>
-                    </span>
                 </small>
             </span>
         </h2>

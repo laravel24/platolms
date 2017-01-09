@@ -55,7 +55,7 @@ class MinorRepository extends Repository
 	 */
 	public function getMinors(array $scopes = [])
 	{
-		return $this->findAllBy($this->table, $scopes);
+		return $this->findAllBy($this->model, $scopes);
 	}
 
 	/**

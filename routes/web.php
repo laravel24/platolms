@@ -77,10 +77,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		Route::resource('degrees', 'DegreesController');
 		// Majors
 		Route::get('/majors/archived', 'MajorsController@archived')->name('majors.archived');
-		Route::get('/majors/import', 'MajorsController@importMajors')->name('majors.import');
-		Route::post('/majors/import', 'MajorsController@addMultipleMajors')->name('majors.upload.multiple');
 		Route::resource('majors', 'MajorsController');
 		// Majors
+		Route::get('/minors/archived', 'MinorsController@archived')->name('minors.archived');
 		Route::resource('minors', 'MinorsController');
 		// Minors
 		Route::resource('minors', 'MinorsController');

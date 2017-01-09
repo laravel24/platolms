@@ -35,7 +35,7 @@ class MinorsController extends Controller
 	{
 		$minors = $this->repository->getMinors();
 		$menuTab = $this->menuTab;
-		return response()->view('admin.minors.index', compact(['minors', 'menuTab']));
+		return response()->view('admin.catalogues.minors.index', compact(['minors', 'menuTab']));
 	}
 
 	/**
@@ -46,7 +46,7 @@ class MinorsController extends Controller
 	public function create()
 	{
 		$menuTab = $this->menuTab;
-	    return response()->view('admin.minors.create', compact(['menuTab']));
+	    return response()->view('admin.catalogues.minors.create', compact(['menuTab']));
 	}
 
 	/**
@@ -57,7 +57,10 @@ class MinorsController extends Controller
 	public function store(Request $request)
 	{
         $validator = $this->validate($request, [
-        	//
+        	'name' => 'required',
+        	'slug' => 'required',
+        	'description' => 'required',
+        	'hours' => 'required',
         ]);
 
         try
@@ -83,7 +86,7 @@ class MinorsController extends Controller
 	{
 		$minor = $this->repository->getMinor($id);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.minors.edit', compact(['minor', 'menuTab']));
+		return response()->view('admin.catalogues.minors.edit', compact(['minor', 'menuTab']));
 	}
 
 	/**
@@ -94,7 +97,10 @@ class MinorsController extends Controller
 	public function update(Request $request, $id)
 	{
         $validator = $this->validate($request, [
-        	//
+        	'name' => 'required',
+        	'slug' => 'required',
+        	'description' => 'required',
+        	'hours' => 'required',
         ]);
 
         try
@@ -108,7 +114,7 @@ class MinorsController extends Controller
 
         // returns back with success message
         flash()->success('The minor was updated!');
-        return redirect()->action('Admin\Catalogue\MinorController@edit', ['minor' => $id]);
+        return redirect()->action('Admin\Catalogue\MinorsController@edit', ['minor' => $id]);
 	}
 
 	/**
