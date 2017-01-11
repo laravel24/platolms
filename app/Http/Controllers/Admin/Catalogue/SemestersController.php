@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Catalogue;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\SemesterRepository as SemesterRepository;
 
 class SemestersController extends Controller
 {
@@ -34,7 +35,7 @@ class SemestersController extends Controller
 	{
 		$semesters = $this->repository->getSemesters();
 		$menuTab = $this->menuTab;
-		return response()->view('admin.semesters.index', compact(['semesters', 'menuTab']));
+		return response()->view('admin.catalogues.semesters.index', compact(['semesters', 'menuTab']));
 	}
 
 	/**
@@ -45,7 +46,7 @@ class SemestersController extends Controller
 	public function create()
 	{
 		$menuTab = $this->menuTab;
-	    return response()->view('admin.semesters.create', compact(['menuTab']));
+	    return response()->view('admin.catalogues.semesters.create', compact(['menuTab']));
 	}
 
 	/**
@@ -56,7 +57,9 @@ class SemestersController extends Controller
 	public function store(Request $request)
 	{
         $validator = $this->validate($request, [
-        	//
+        	'title' => 'required',
+        	'start' => 'required',
+        	'end' => 'required',
         ]);
 
         try
@@ -69,7 +72,7 @@ class SemestersController extends Controller
         }
 
         // returns back with success message
-        flash()->success('Your Semester was added!');
+        flash()->success('Your semester was added!');
         return redirect()->action('Admin\Catalogue\SemestersController@index');
 	}
 
@@ -82,7 +85,7 @@ class SemestersController extends Controller
 	{
 		$semester = $this->repository->getSemester($id);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.semesters.edit', compact(['semester', 'menuTab']));
+		return response()->view('admin.catalogues.semesters.edit', compact(['semester', 'menuTab']));
 	}
 
 	/**
@@ -93,7 +96,9 @@ class SemestersController extends Controller
 	public function update(Request $request, $id)
 	{
         $validator = $this->validate($request, [
-        	//
+        	'title' => 'required',
+        	'start' => 'required',
+        	'end' => 'required',
         ]);
 
         try
@@ -107,7 +112,7 @@ class SemestersController extends Controller
 
         // returns back with success message
         flash()->success('The semester was updated!');
-        return redirect()->action('Admin\Catalogue\SemesterController@edit', ['semester' => $id]);
+        return redirect()->action('Admin\Catalogue\SemestersController@edit', ['semester' => $id]);
 	}
 
 	/**

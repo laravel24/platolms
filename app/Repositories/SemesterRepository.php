@@ -55,7 +55,7 @@ class SemesterRepository extends Repository
 	 */
 	public function getSemesters(array $scopes = [])
 	{
-		return $this->findAllBy($this->table, $scopes);
+		return $this->findAllBy($this->model, $scopes);
 	}
 
 	/**

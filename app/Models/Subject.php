@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Database\Eloquent\Model;
 
-class SemesterType extends Model 
+class Subject extends Model 
 {
-
+    use SoftDeletes;
+    
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'semester_types';
+    protected $table = 'subjects';
     
     /**
      * The attributes that are mass assignable.
@@ -20,7 +23,7 @@ class SemesterType extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'start', 'end',
+        'name', 'slug'
     ];
 
     /**
@@ -35,6 +38,7 @@ class SemesterType extends Model
      *
      * @var array
      */
-    protected $dates = [];
-
+    protected $dates = [
+        'deleted_at'
+    ];
 }

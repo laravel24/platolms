@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-class SemesterTypeRepository extends Repository
+class SubjectRepository extends Repository
 {
 
 	/**
@@ -10,8 +10,8 @@ class SemesterTypeRepository extends Repository
 	 */
 	public function __construct()
 	{
-		$this->table = 'semester_types';
-		$this->model = 'App\Models\SemesterType';
+		$this->table = 'subjects';
+		$this->model = 'App\Models\Subject';
 	}
 
 	/**
@@ -20,7 +20,7 @@ class SemesterTypeRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function getSemesterType($entityIdOrIds)
+	public function getSubject($entityIdOrIds)
 	{
 		return $this->find($this->model, $entityIdOrIds);
 	}
@@ -31,7 +31,7 @@ class SemesterTypeRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function getSemesterTypeBy($field, $value)
+	public function getSubjectBy($field, $value)
 	{
 		return $this->findOneBy($this->model, $field, $value);
 	}
@@ -42,9 +42,9 @@ class SemesterTypeRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function getSemesterTypesByIds(array $entityIds = null)
+	public function getSubjectsByIds(array $entityIds = null)
 	{
-		return $this->getPost($entityIds);
+		return $this->getSubject($entityIds);
 	}
 
 	/**
@@ -53,9 +53,9 @@ class SemesterTypeRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function getSemesterTypes(array $scopes = [])
+	public function getSubjects(array $scopes = [])
 	{
-		return $this->findAllBy($this->table, $scopes);
+		return $this->findAllBy($this->model, $scopes);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class SemesterTypeRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function paginateSemesterTypes(array $scopes, $limit = 15, $withTrashed = false)
+	public function paginateSubjects(array $scopes, $limit = 15, $withTrashed = false)
 	{
 		return $this->paginate($this->model, $scopes, $limit, $withTrashed);
 	}
@@ -75,7 +75,7 @@ class SemesterTypeRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function createSemesterType(array $entityData)
+	public function createSubject(array $entityData)
 	{
 		return $this->create($this->table, $entityData);
 	}
@@ -86,7 +86,7 @@ class SemesterTypeRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function updateSemesterType($entityId, array $entityData)
+	public function updateSubject($entityId, array $entityData)
 	{
 		return $this->update($this->model, $entityId, $entityData);
 	}
@@ -97,27 +97,9 @@ class SemesterTypeRepository extends Repository
 	 * @param  array  $data
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
-	public function deleteSemesterType($entityId)
+	public function deleteSubject($entityId)
 	{
 		return $this->delete($this->model, $entityId);
-	}
-
-	/**
-	 * Delete multiple entities.
-	 *
-	 * @param  array  $data
-	 * @return \Illuminate\Contracts\Validation\Validator
-	 */
-	public function deleteSemesterTypes(array $entityIds)
-	{
-		$deletedPosts = [];
-		foreach ($entityIds as $entityId)
-		{
-			$deletedPost = $this->deleteUser($entityId);
-			array_push($deletedPosts, $deletedPost);
-		}
-
-		return $deletedPosts;
 	}
 
 }

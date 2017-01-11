@@ -2,14 +2,14 @@
 
 @section('content')
     <div class="primary-content" id="page-content">
-        <h2 class="page-header mb30">All Courses
+        <h2 class="page-header mb30">All Subjects
             <span class="pull-right">
                 <small>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                           <a href="{{ route('admin.courses.archived') }}"><i class="fa fa-user"></i> &nbsp; Archived Courses</a>
+                           <a href="{{ route('admin.subjects.archived') }}"><i class="fa fa-user"></i> &nbsp; Archived Subjects</a>
                     </span>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                            <a href="{{ route('admin.courses.create') }}"><i class="fa fa-user"></i> &nbsp; New Course</a>
+                            <a href="{{ route('admin.subjects.create') }}"><i class="fa fa-user"></i> &nbsp; New Subject</a>
                     </span>
                 </small>
             </span>
@@ -17,11 +17,11 @@
 
         @include('layouts.partials.flash')      
 
-        @if (count($courses) > 0)
+        @if (count($subjects) > 0)
 
             <div class="content-box">      
                 <div class="table-responsive">
-                    <table id="courses-table" class="table table-striped">
+                    <table id="subjects-table" class="table table-striped">
                         <thead>
                             <tr>
                                 <th></th>
@@ -29,16 +29,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($courses as $course)
+                            @foreach ($subjects as $subject)
 
-                                <tr id="{{ $course->id }}">
+                                <tr id="{{ $subject->id }}">
                                     <td>
-                                        <a href="{{ route('admin.courses.show', $course->id) }}">{{ $course->name }}</a>
+                                        <a href="{{ route('admin.subjects.show', $subject->id) }}">{{ $subject->name }}</a>
                                     </td>
                                     <td class="text-right" style="padding-top: 15px;">
-                                        <a href="{{ route('admin.courses.show', $course->id) }}" class="btn btn-success btn-sm"><i class="fa fa-globe"></i></a>
-                                        <a href="{{ route('admin.courses.edit', $course->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-                                        <a class="btn btn-danger btn-sm" @click.prevent="confirmDelete({!! $course->id !!}, $event)"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('admin.subjects.show', $subject->id) }}" class="btn btn-success btn-sm"><i class="fa fa-globe"></i></a>
+                                        <a href="{{ route('admin.subjects.edit', $subject->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-sm" @click.prevent="confirmDelete({!! $subject->id !!}, $event)"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
 
@@ -51,7 +51,7 @@
         @else
 
             <div>
-                <p>You have no courses added at this time.</p>
+                <p>You have no subjects added at this time.</p>
             </div>
 
         @endif
@@ -82,7 +82,7 @@
                     {
                         swal({
                             title: 'Are you sure?',
-                            text: "The courses will be archived and any associated data for the current cataloge along with it!",
+                            text: "The subjects will be archived and any associated data for the current cataloge along with it!",
                             type: 'warning',
                             showCancelButton: true,
                             confirmButtonText: 'Yes, archive it!',
@@ -93,12 +93,12 @@
                         })
                         .then(function() {
                             // Send the AJAX that deletes the user
-                            Vue.http.delete('/' + adminURI + '/courses/' + id, {}).then((response) => {
+                            Vue.http.delete('/' + adminURI + '/subjects/' + id, {}).then((response) => {
                                 $('#' + id).hide();
                                 console.log(response);
                                 swal({
                                     title: 'Archive Complete',
-                                    text: "This course has been archived.",
+                                    text: "This subject has been archived.",
                                     type: 'success',
                                     showCancelButton: false,
                                     confirmButtonText: 'Got it!',

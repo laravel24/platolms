@@ -17,7 +17,9 @@ class CreateSemestersTable extends Migration
 		Schema::create('semesters', function(Blueprint $table)
 		{
 			$table->increments('id')->unsigned();
-            $table->mediumInteger('semester_type')->unsigned();
+            $table->string('title');
+            $table->date('start');
+            $table->date('end');
 	        $table->softDeletes();
             $table->timestamps();        
         });

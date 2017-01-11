@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin\Courses;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\CourseRepository as CourseRepository;
+use App\Repositories\SubjectRepository as SubjectRepository;
 
-class CoursesController extends Controller
+class SubjectsController extends Controller
 {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Courses Controller
+	| Subjects Controller
 	|--------------------------------------------------------------------------
 	*/
 
@@ -20,49 +20,50 @@ class CoursesController extends Controller
 	 *
 	 * @return void
 	 */
-	public function __construct(CourseRepository $courseRepo)
+	public function __construct(SubjectRepository $subjectRepo)
 	{
-		$this->repository = $courseRepo;
-		$this->menuTab = 'courses';
+		$this->repository = $subjectRepo;
+		$this->menuTab = 'subjects';
 	}
 
 	/**
-	 * Show the index of Courses.
+	 * Show the index of Subjects.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$courses = $this->repository->getCourses();
+		$subjects = $this->repository->getSubjects();
 		$menuTab = $this->menuTab;
-		return response()->view('admin.courses.courses.index', compact(['courses', 'menuTab']));
+		return response()->view('admin.courses.subjects.index', compact(['subjects', 'menuTab']));
 	}
 
 	/**
-	 * Show an page to create a Course
+	 * Show an page to create a Subjects
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
 		$menuTab = $this->menuTab;
-	    return response()->view('admin.courses.courses.create', compact(['menuTab']));
+	    return response()->view('admin.courses.subjects.create', compact(['menuTab']));
 	}
 
 	/**
-	 * Store the newly created Course
+	 * Store the newly created Subjects
 	 *
 	 * @return Response
 	 */
 	public function store(Request $request)
 	{
         $validator = $this->validate($request, [
-        	//
+        	'name' => 'required',
+        	'slug' => 'required',
         ]);
 
         try
         {
-        	$newCourse = $this->repository->createCourse($request->all());
+        	$newSubject = $this->repository->createSubject($request->all());
 
         } catch(\Exception $exception)
         {
@@ -70,36 +71,37 @@ class CoursesController extends Controller
         }
 
         // returns back with success message
-        flash()->success('Your course was added!');
-        return redirect()->action('Admin\Courses\CoursesController@index');
+        flash()->success('Your subject was added!');
+        return redirect()->action('Admin\Courses\SubjectsController@index');
 	}
 
 	/**
-	 * Show an individual Course's profile
+	 * Show an individual Subject's profile
 	 *
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-		$course = $this->repository->getCourse($id);
+		$subject = $this->repository->getSubject($id);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.courses.courses.edit', compact(['course', 'menuTab']));
+		return response()->view('admin.courses.subjects.edit', compact(['subject', 'menuTab']));
 	}
 
 	/**
-	 * Update the newly created Course
+	 * Update the newly created Subjects
 	 *
 	 * @return Response
 	 */
 	public function update(Request $request, $id)
 	{
         $validator = $this->validate($request, [
-        	//
+        	'name' => 'required',
+        	'slug' => 'required',
         ]);
 
         try
         {
-        	$updatedCourse = $this->repository->updateCourse($id, $request->all());
+        	$updatedSubject = $this->repository->updateSubject($id, $request->all());
 
         } catch(\Exception $exception)
         {
@@ -107,12 +109,12 @@ class CoursesController extends Controller
         }
 
         // returns back with success message
-        flash()->success('The course was updated!');
-        return redirect()->action('Admin\Courses\CourseController@edit', ['course' => $id]);
+        flash()->success('The subject was updated!');
+        return redirect()->action('Admin\Courses\SubjectsController@edit', ['subject' => $id]);
 	}
 
 	/**
-	 * Archive the Course
+	 * Archive the Subject
 	 *
 	 * @return Boolean
 	 */
@@ -120,7 +122,7 @@ class CoursesController extends Controller
 	{
         try
         {
-        	$this->repository->deleteCourse($id);
+        	$this->repository->deleteSubject($id);
 
         } catch(\Exception $exception)
         {

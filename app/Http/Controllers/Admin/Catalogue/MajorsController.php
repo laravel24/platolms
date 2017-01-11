@@ -51,7 +51,8 @@ class MajorsController extends Controller
 		$title = $this->title;
 		$colleges = \App\Models\College::get()->pluck('name', 'id');
 		$degreeTypes = \App\Models\Degree::get()->pluck('name', 'id');
-	    return response()->view('admin.catalogues.majors.create', compact(['menuTab', 'title', 'colleges', 'degreeTypes']));
+		$minors = \App\Models\Minor::get()->pluck('name', 'id');
+	    return response()->view('admin.catalogues.majors.create', compact(['menuTab', 'title', 'colleges', 'degreeTypes', 'minors']));
 	}
 
 	/**
@@ -95,7 +96,8 @@ class MajorsController extends Controller
 		$menuTab = $this->menuTab;
 		$colleges = \App\Models\College::get()->pluck('name', 'id');
 		$degreeTypes = \App\Models\Degree::get()->pluck('name', 'id');
-		return response()->view('admin.catalogues.majors.edit', compact(['major', 'menuTab', 'colleges', 'degreeTypes']));
+		$minors = \App\Models\Minor::get()->pluck('name', 'id');
+		return response()->view('admin.catalogues.majors.edit', compact(['major', 'menuTab', 'colleges', 'degreeTypes', 'minors']));
 	}
 
 	/**

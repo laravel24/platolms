@@ -71,6 +71,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		Route::get('/colleges/archived', 'CollegesController@archived')->name('colleges.archived');
 		Route::resource('colleges', 'CollegesController');
 		// Catalogues
+		Route::get('/catalogues/archived', 'CataloguesController@archived')->name('catalogues.archived');
 		Route::resource('catalogues', 'CataloguesController');
 		// Degrees
 		Route::get('/degrees/archived', 'DegreesController@archived')->name('degrees.archived');
@@ -78,14 +79,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		// Majors
 		Route::get('/majors/archived', 'MajorsController@archived')->name('majors.archived');
 		Route::resource('majors', 'MajorsController');
-		// Majors
+		// Minors
 		Route::get('/minors/archived', 'MinorsController@archived')->name('minors.archived');
 		Route::resource('minors', 'MinorsController');
-		// Minors
-		Route::resource('minors', 'MinorsController');
 		// Plans
+		Route::get('/semesters/archived', 'SemestersController@archived')->name('semesters.archived');
 		Route::resource('plans', 'PlansController');
 		// Semesters
+		Route::get('/semesters/archived', 'SemestersController@archived')->name('semesters.archived');
 		Route::resource('semesters', 'SemestersController');
 	});
 
@@ -103,6 +104,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		// Conversations
 		Route::resource('conversations', 'ConversationsController');
 		// Courses
+		Route::get('/courses/archived', 'CoursesController@archived')->name('courses.archived');
 		Route::resource('courses', 'CoursesController');
 		// Grading
 		Route::resource('grading', 'GradingController');
@@ -116,6 +118,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		Route::resource('pages', 'PagesController');
 		// Resources
 		Route::resource('resources', 'ResourcesController');
+		// Subject
+		Route::get('/subjects/archived', 'SubjectsController@archived')->name('subjects.archived');
+		Route::resource('subjects', 'SubjectsController');
 		// Syllabus
 		Route::resource('syllabus', 'SyllabusController');
 		// Templates

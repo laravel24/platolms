@@ -104,6 +104,17 @@
 	}				
 
 	/**
+	 * Create an Date Input Field
+	 *
+	 * @return string
+	 */
+	function makeDateInputField($name, $label, $default, $placeholder, $required, $errors, $class = '')
+	{
+		$formField = Form::date($name, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
+		return makeBaseForm($formField, $name, $label, $errors);
+	}	
+
+	/**
 	 * Create a Radio Field
 	 *
 	 * @return string

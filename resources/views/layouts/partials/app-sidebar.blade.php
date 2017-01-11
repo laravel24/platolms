@@ -19,14 +19,14 @@
         <a href="{{ route('admin.degrees.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'degrees')) active @endif">Degrees</a>
         <a href="{{ route('admin.majors.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'majors')) active @endif">Majors</a>
         <a href="{{ route('admin.minors.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'minors')) active @endif">Minors</a>
-        <a href="{{ route('admin.catalogues.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'catalogues')) active @endif">Catalogues</a>
         <a href="{{ route('admin.plans.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'plans')) active @endif">Plans</a>
         <a href="{{ route('admin.semesters.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'semesters')) active @endif">Semesters</a>
+        <a href="{{ route('admin.catalogues.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'catalogues')) active @endif">Catalogues</a>
     </div>
 
     <h5>Courses</h5>
     <div class="list-group">
-        <a href="" class="list-group-item @if (isset($menuTab) && ($menuTab == 'course-categories')) active @endif">Course Categories</a>
-        <a href="" class="list-group-item @if (isset($menuTab) && ($menuTab == 'courses')) active @endif">Courses</a>
+        <a href="{{ route('admin.subjects.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'subjects')) active @endif">Subjects</a>
+        <a href="{{ route('admin.courses.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'courses')) active @endif">Courses</a>
     </div>
 </div>
