@@ -7,13 +7,16 @@
             <span class="pull-right">
                 <small>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                           <a href=""><i class="fa fa-user"></i> &nbsp; Semesters</a>
+                            <a href=""><i class="fa fa-user"></i> &nbsp; Options</a>
+                    </span>
+                    <span style="margin-left:15px;font-size:70%;font-weight:700;">
+                           <a href=""><i class="fa fa-user"></i> &nbsp; Scheduling</a>
                     </span>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
                             <a href=""><i class="fa fa-user"></i> &nbsp; Revisions</a>
                     </span>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
-                            <a href=""><i class="fa fa-user"></i> &nbsp; Online Content</a>
+                            <a href=""><i class="fa fa-user"></i> &nbsp; Content</a>
                     </span>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
                             <a href=""><i class="fa fa-user"></i> &nbsp; Files</a>
