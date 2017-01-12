@@ -17,15 +17,15 @@ class UsersTableSeeder extends Seeder
 	    factory(App\Models\User::class, $numberOfPeopleToSeed)->create();
 
 	    // For easy dev tests only
-        $jason = App\Models\User::create([
+        $dev = App\Models\User::create([
             'id' => $numberOfPeopleToSeed + 1,
-            'email' => 'jasonherndon86@gmail.com',
+            'email' => env('DEV_EMAIL', 'johndoe@mailinator.com'),
             'password' => bcrypt('snuffles'),
-            'first' => 'Jason',
-            'last' => 'Herndon',
-            'display_name' => 'Jason Herndon',
-            'bio' => 'Developer. Writer. Storyteller. Backpacker.',
-            'img' => 'https://pbs.twimg.com/profile_images/735287189601452032/Amstvgi5_400x400.jpg',
+            'first' => env('DEV_FIRST', 'John'),
+            'last' => env('DEV_LAST', 'Doe'),
+            'display_name' => env('DEV_FIRST', 'John') . ' ' . env('DEV_LAST', 'Doe'),
+            'bio' => env('DEV_BIO', 'Here is the dev bio'),
+            'img' => env('DEV_PIC', 'http://placeholder.pics/svg/300x300/DEDEDE/555555/avatar'),
             'question' => 'What city were you born in?',
             'answer' => 'New York',
 	        'address' => '1234 S Madison Square Avenue',

@@ -21,7 +21,7 @@ class UsersRolesTableSeeder extends Seeder
             $user->roles()->syncWithoutDetaching([$studentRole->id]);
 
             // For easy dev tests only
-            if ($user->email == 'jasonherndon86@gmail.com')
+            if ($user->email == env('DEV_EMAIL'))
             {
                 $user->roles()->syncWithoutDetaching([1]);
             }
