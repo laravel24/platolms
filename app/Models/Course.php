@@ -37,4 +37,11 @@ class Course extends Model
      */
     protected $dates = [];
 
+    /**
+     * Get the subjects of the course
+     */
+    public function subjects()
+    {
+        return $this->belongsToMany('App\Models\Subject', 'courses_subjects');
+    }
 }

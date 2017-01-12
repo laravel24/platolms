@@ -11,19 +11,21 @@
         <div class="content-box">          
 
             {!! Form::open(['route' => ['admin.courses.store'], 'id' => 'form', 'method' => 'post', 'files' => 'true']) !!}
-                <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                    <label class="control-label" for="name">Course Name</label>
-                    <input type="text" class="form-control" name="name" v-model="courseName" required>
-                    @if ($errors->has('name'))
+                <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
+                    <label class="control-label" for="title">Course Title</label>
+                    <input type="text" class="form-control" name="title" v-model="courseTitle" required>
+                    @if ($errors->has('title'))
                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                             <span class="help-block">
-                                <strong>{{ $errors->first('name') }}</strong>
+                                <strong>{{ $errors->first('title') }}</strong>
                             </span>
                     @endif
-                    <small>URL: /majors/<span id="courseNamePreview">@{{ courseName | slugify }}</span></small>
+                    <small>URL: /courses/<span id="courseTitlePreview">@{{ courseTitle | slugify }}</span></small>
                     <input type="hidden" name="slug" v-model="slug">
                 </div>
 
+                {!! makeTextField('sub_title', 'Sub Title', '', '', 'optional', $errors) !!}
+                {!! makeSelectField('subjects[]', $subjects, 'Subjects', '', '', 'required', $errors, '', true) !!}
                 {!! makeTextAreaField('description', 'Description', '', '', 'required', $errors) !!}
 
                 {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
@@ -40,7 +42,7 @@
             el: '#page-content',
             data: {
                 name: 'Vue.js',
-                courseName: '',
+                courseTitle: '',
             },
             // http: {
             //         emulateJSON: true,
@@ -48,7 +50,7 @@
             // },
             computed: {
                 slug: function () {
-                    return this.slugifyTitle(this.courseName);
+                    return this.slugifyTitle(this.courseTitle);
                 }
             },
             filters: {

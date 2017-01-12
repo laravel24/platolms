@@ -17,9 +17,11 @@ class CreateCoursesTable extends Migration
 		Schema::create('courses', function(Blueprint $table)
 		{
 			$table->increments('id')->unsigned();			
-            $table->mediumInteger('revision_id')->unsigned();
-            $table->string('title');
+            $table->mediumInteger('revision_id')->unsigned()->default(1);
+            $table->string('title')->unique();
+            $table->string('slug');
             $table->string('sub_title')->nullable();
+            $table->text('description')->nullable();
             $table->text('img')->nullable();
             $table->boolean('online')->nullable()->default(false);
             $table->text('options')->nullable();

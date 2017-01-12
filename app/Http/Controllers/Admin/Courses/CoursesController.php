@@ -46,7 +46,8 @@ class CoursesController extends Controller
 	public function create()
 	{
 		$menuTab = $this->menuTab;
-	    return response()->view('admin.courses.courses.create', compact(['menuTab']));
+		$subjects = \App\Models\Subject::pluck('name', 'id');
+	    return response()->view('admin.courses.courses.create', compact(['menuTab', 'subjects']));
 	}
 
 	/**
@@ -57,12 +58,23 @@ class CoursesController extends Controller
 	public function store(Request $request)
 	{
         $validator = $this->validate($request, [
-        	//
+        	'title' => 'required',
+        	'description' => 'required',
         ]);
 
         try
         {
         	$newCourse = $this->repository->createCourse($request->all());
+
+        	try{
+
+        		$course = \App\Models\Course::find($newCourse);
+	            $course->subjects()->syncWithoutDetaching($request->subjects);
+
+	        } catch(\Exception $exception)
+	        {
+	            $this->flashErrorAndReturnWithMessage($exception);
+	        }
 
         } catch(\Exception $exception)
         {

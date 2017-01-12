@@ -33,7 +33,7 @@
 
                                 <tr id="{{ $course->id }}">
                                     <td>
-                                        <a href="{{ route('admin.courses.show', $course->id) }}">{{ $course->name }}</a>
+                                        <a href="{{ route('admin.courses.show', $course->id) }}">{{ $course->title }}</a>
                                     </td>
                                     <td class="text-right" style="padding-top: 15px;">
                                         <a href="{{ route('admin.courses.show', $course->id) }}" class="btn btn-success btn-sm"><i class="fa fa-globe"></i></a>
