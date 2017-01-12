@@ -95,7 +95,8 @@ class CoursesController extends Controller
 	{
 		$course = $this->repository->getCourse($id);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.courses.courses.edit', compact(['course', 'menuTab']));
+		$subjects = \App\Models\Subject::pluck('name', 'id');
+		return response()->view('admin.courses.courses.edit', compact(['course', 'menuTab', 'subjects']));
 	}
 
 	/**
