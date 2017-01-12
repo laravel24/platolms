@@ -42,6 +42,10 @@
                 </div>
 
                 {!! makeTextField('sub_title', 'Sub Title', $course->sub_title, '', 'optional', $errors) !!}
+                {!! makeTextField('number', 'Course Number', $course->number, '', 'required', $errors) !!}
+                @if (!empty(Config::get('settings.course.levels')))
+                    {!! makeSelectField('level', Config::get('settings.course.levels'), 'Course Level', $course->level, '', 'required', $errors, '') !!}
+                @endif
                 {!! makeSelectField('subjects[]', $subjects, 'Subjects', $course->subjects->pluck('id')->toArray(), '', 'required', $errors, '', true) !!}
                 {!! makeTextAreaField('description', 'Description', $course->description, '', 'required', $errors) !!}
                 {!! makeCheckBoxField('online', 'This Course Is Offered Online Too?', '1', $course->online, '', 'optional', $errors) !!}

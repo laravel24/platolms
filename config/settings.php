@@ -7,7 +7,8 @@ return [
         | Course Levels
         |--------------------------------------------------------------------------
         | Set the levels you wish to use for organizing courses. Leave the array empty
-        | to disregard coures levels.
+        | to disregard coures levels. Use a level marked '000' to designate courses
+        | not assigned to a level in an LMS environment where other courses are.
         */
         'levels' => [
             '100', '200', '300', '400', '500', '600'
