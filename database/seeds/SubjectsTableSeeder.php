@@ -11,7 +11,7 @@ class SubjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        $names = Config::get('academics.subjects');
+        $names = Config::get('seed.subjects');
 
         foreach ($names as $name)
         {

@@ -3,7 +3,24 @@
 @section('content')
     <div class="primary-content" id="page-content">
         <div class="">
-            <h2 class="page-header mb30">Update Course</h2>
+            <h2 class="page-header mb30">Update Course
+            <span class="pull-right">
+                <small>
+                    <span style="margin-left:15px;font-size:70%;font-weight:700;">
+                           <a href=""><i class="fa fa-user"></i> &nbsp; Semesters</a>
+                    </span>
+                    <span style="margin-left:15px;font-size:70%;font-weight:700;">
+                            <a href=""><i class="fa fa-user"></i> &nbsp; Revisions</a>
+                    </span>
+                    <span style="margin-left:15px;font-size:70%;font-weight:700;">
+                            <a href=""><i class="fa fa-user"></i> &nbsp; Online Content</a>
+                    </span>
+                    <span style="margin-left:15px;font-size:70%;font-weight:700;">
+                            <a href=""><i class="fa fa-user"></i> &nbsp; Files</a>
+                    </span>
+                </small>
+            </span>
+        </h2>
         </div>
 
         @include('layouts.partials.flash')      
