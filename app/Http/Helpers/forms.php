@@ -58,15 +58,13 @@
 	 *
 	 * @return string
 	 */
-	function makeSelectField($name, $options, $label, $default, $placeholder, $required, $errors, $class = '')
+	function makeSelectField($name, $options, $label, $default, $placeholder, $required, $errors, $class = '', $multiple = null)
 	{
-		$formField = Form::select($name, $options, $default, [''.$required.'', 'class' => ''.$class.' form-control']);			
-
+		$formField = Form::select($name, $options, $default, [''.$required.'', 'class' => ''.$class.' form-control', 'multiple' => $multiple]);		
 		if ($placeholder)
 		{
-			$formField = Form::select($name, $options, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control']);
+			$formField = Form::select($name, $options, $default, [''.$required.'', 'placeholder' => ''.$placeholder.'', 'class' => ''.$class.' form-control', 'multiple' => $multiple]);
 		}
-
 		return makeBaseForm($formField, $name, $label, $errors);
 	}
 
