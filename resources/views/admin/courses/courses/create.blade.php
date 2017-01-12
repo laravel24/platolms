@@ -27,6 +27,7 @@
                 {!! makeTextField('sub_title', 'Sub Title', '', '', 'optional', $errors) !!}
                 {!! makeSelectField('subjects[]', $subjects, 'Subjects', '', '', 'required', $errors, '', true) !!}
                 {!! makeTextAreaField('description', 'Description', '', '', 'required', $errors) !!}
+                {!! makeCheckBoxField('online', 'This Course Is Offered Online Too?', '1', '1', '', 'optional', $errors) !!}
 
                 {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
             {!! Form::close() !!}
