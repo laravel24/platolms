@@ -80,11 +80,11 @@
                                     <h4 class="mb30 text-warning text-sub-header-color">Profile Avatar</h4>
                                 </div>
 
-                                @if (Config::get('settings.user_image_policy') != '')
+                                @if (Config::get('settings.user.user_image_policy') != '')
                                     <div class="{{ getColumns(12) }}">
                                         <div class="well">
                                             <h5>Image Policy</h5>
-                                            <p>{!! Config::get('settings.user_image_policy') !!}</p>
+                                            <p>{!! Config::get('settings.user.user_image_policy') !!}</p>
                                         </div>
                                     </div>
                                 @endif

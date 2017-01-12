@@ -2,7 +2,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.1.0/sweetalert2.min.js"></script>
     <script>
             // SweetAlert -> Send the AJAX Call to Delete the User w/ Confirmation & Error States
-            const userArchiveLimit = {!! Config::get('settings.user_archive_limit') !!};
+            const userArchiveLimit = {!! Config::get('settings.user.user_archive_limit') !!};
             const adminURI = "{!! env('ADMIN_URI') !!}";
             var selectedUsers = [];
             var selectedRoles = 'All';
