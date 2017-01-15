@@ -20,7 +20,7 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
-        'revision_id', 'level', 'number', 'title', 'slug', 'sub_title', 'description', 'img', 'online', 'options'
+        'revision_id', 'subject_id', 'level', 'number', 'title', 'slug', 'sub_title', 'description', 'img', 'online', 'campus', 'options'
     ];
 
     /**

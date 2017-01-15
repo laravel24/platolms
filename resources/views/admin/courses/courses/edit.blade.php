@@ -34,7 +34,8 @@
                 {!! makeSelectField('subject_id', $subjects, 'Subjects', $course->subject_id, '', 'required', $errors, '') !!}
                 {!! makeSelectField('tags[]', $tags, 'Tags', $course->tags->pluck('id')->toArray(), '', 'required', $errors, '', true) !!}
                 {!! makeTextAreaField('description', 'Description', $course->description, '', 'required', $errors) !!}
-                {!! makeCheckBoxField('online', 'This Course Is Offered Online Too?', '1', $course->online, '', 'optional', $errors) !!}
+                {!! makeCheckBoxField('online', 'This Course Is Offered Online?', '1', $course->online, '', 'optional', $errors) !!}
+                {!! makeCheckBoxField('campus', 'This Course Is Offered On Campus?', '1', $course->campus, '', 'optional', $errors) !!}
 
                 {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right']) !!}
             {!! Form::close() !!}

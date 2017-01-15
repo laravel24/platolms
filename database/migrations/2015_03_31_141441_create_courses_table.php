@@ -26,6 +26,7 @@ class CreateCoursesTable extends Migration
             $table->string('sub_title')->nullable();
             $table->text('description')->nullable();
             $table->text('img')->nullable();
+            $table->boolean('campus')->nullable()->default(false);
             $table->boolean('online')->nullable()->default(false);
             $table->text('options')->nullable();
             $table->softDeletes();
