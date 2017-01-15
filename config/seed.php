@@ -6,9 +6,66 @@ return [
     |--------------------------------------------------------------------------
     | Adademics Rubric Meant for Seed Use Only
     |--------------------------------------------------------------------------
-    |
-    | Loosely Based on the University of South Florida.
     */
+    'campuses' => [
+        [
+            'title' => 'Plato University at Miami',
+            'address' => '1320 S Dixie Hwy',
+            'address_2' => '',
+            'city' => 'Coral Gables',
+            'postal' => '33146',
+            'state' => 'FL',
+            'country' => 'US',
+            'timezone' => 'EST',
+            'phone' => '',
+            'desc' => '',
+        ],
+        [
+            'title' => 'Plato University at New York',
+            'address' => '70 Washington Square South',
+            'address_2' => '',
+            'city' => 'New York',
+            'postal' => '10012',
+            'state' => 'NY',
+            'country' => 'US',
+            'timezone' => 'EST',
+            'phone' => '212-998-1212',
+            'desc' => '',
+        ],
+        [
+            'title' => 'Plato University at Salt Lake City',
+            'address' => '201 Presidents Circle',
+            'address_2' => 'Room 201',
+            'city' => 'Salt Lake City',
+            'postal' => '84112',
+            'state' => 'UT',
+            'country' => 'US',
+            'timezone' => 'MST',
+            'phone' => '801-581-7200',
+            'desc' => '',
+        ],
+        [
+            'title' => 'Plato University Online',
+            'address' => '201 Presidents Circle',
+            'address_2' => 'Room 201',
+            'city' => 'Salt Lake City',
+            'postal' => '84112',
+            'state' => 'UT',
+            'country' => 'US',
+            'timezone' => 'MST',
+            'phone' => '801-581-7200',
+            'desc' => '',
+        ],
+    ],
+    'buildings' => [
+        'Erickson Hall',
+        'Jefferson Hall',
+        'Washington Hall',
+        'Carter Hall',
+        'Obama Hall',
+        'Roosevelt Hall',
+        'Cleveland Hall'
+    ],
     'degrees' => [
 		'Bachelor of Arts', 
 		'Bachelor of Science', 

@@ -13,6 +13,13 @@
         <a href="{{ route('admin.tags.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'post-tags')) active @endif">Post Tags</a>
     </div>
 
+    <h5>Resources</h5>
+    <div class="list-group">
+        <a href="{{ route('admin.campuses.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'campuses')) active @endif">Campuses</a>
+        <a href="{{ route('admin.buildings.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'buildings')) active @endif">Buildings</a>
+        <a href="{{ route('admin.rooms.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'rooms')) active @endif">Rooms</a>
+    </div>
+
     <h5>Degree Programs</h5>
     <div class="list-group">
         <a href="{{ route('admin.colleges.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'colleges')) active @endif">Colleges</a>

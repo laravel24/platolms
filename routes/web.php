@@ -64,6 +64,17 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		Route::resource('tags', 'TagsController');
 	});
 
+	// Resources
+	Route::group(['namespace' => 'Resources', 'as' => 'admin.'], function () 
+	{
+		// Campuses
+		Route::resource('campuses', 'CampusesController');
+		// Buildings
+		Route::resource('buildings', 'BuildingsController');
+		// Rooms
+		Route::resource('rooms', 'RoomsController');
+	});
+
 	// Degree Programs
 	Route::group(['namespace' => 'Catalogue', 'as' => 'admin.'], function () 
 	{
