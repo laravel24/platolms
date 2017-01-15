@@ -220,7 +220,9 @@ class CoursesController extends Controller
 	{
 		$course = $this->repository->getCourse($id);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.courses.courses.scheduling', compact(['course', 'menuTab']));
+		$semesters = \App\Models\Semester::pluck('title', 'id');
+		$campuses = \App\Models\Campus::pluck('title', 'id');
+		return response()->view('admin.courses.courses.scheduling', compact(['course', 'menuTab', 'semesters', 'campuses']));
 	}
 
 	/**
