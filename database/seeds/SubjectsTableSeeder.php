@@ -13,11 +13,12 @@ class SubjectsTableSeeder extends Seeder
     {
         $names = Config::get('seed.subjects');
 
-        foreach ($names as $name)
+        foreach ($names as $key => $value)
         {
             App\Models\Subject::create([
-                'name' => $name,
-                'slug' => str_slug($name, '-'),
+                'name' => $key,
+                'abbr' => $value,
+                'slug' => str_slug($key, '-'),
             ]);
         }
 

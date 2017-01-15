@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
 		{
 			$table->increments('id')->unsigned();			
             $table->mediumInteger('revision_id')->unsigned()->default(1);
+            $table->integer('subject_id')->unsigned();
             $table->integer('level')->unsigned()->default(000);
             $table->string('number');
             $table->string('title')->unique();

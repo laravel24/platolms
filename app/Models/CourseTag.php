@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model 
+class CourseTag extends Model 
 {
     use SoftDeletes;
     
@@ -15,7 +15,7 @@ class Subject extends Model
      *
      * @var string
      */
-    protected $table = 'subjects';
+    protected $table = 'course_tags';
     
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class Subject extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'abbr', 'slug'
+        'name', 'slug'
     ];
 
     /**
