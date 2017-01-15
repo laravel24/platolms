@@ -38,10 +38,18 @@ class Course extends Model
     protected $dates = [];
 
     /**
-     * Get the subjects of the course
+     * Get the subject of the course
      */
-    public function subjects()
+    public function subject()
     {
-        return $this->belongsToMany('App\Models\Subject', 'courses_subjects');
+        return $this->belongsTo('App\Models\Subject');
+    }
+
+    /**
+     * Get the tags of the course
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\CourseTag', 'courses_tags');
     }
 }
