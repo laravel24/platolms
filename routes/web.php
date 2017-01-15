@@ -104,6 +104,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		// Conversations
 		Route::resource('conversations', 'ConversationsController');
 		// Courses
+		Route::get('/courses/{course}/options', 'CoursesController@options')->name('courses.options');
+		Route::post('/courses/{course}/options', 'CoursesController@updateOptions')->name('courses.update.options');
+		Route::get('/courses/{course}/scheduling', 'CoursesController@scheduling')->name('courses.scheduling');
+		Route::post('/courses/{course}/scheduling', 'CoursesController@updateScheduling')->name('courses.update.scheduling');
+		Route::get('/courses/{course}/revisions', 'CoursesController@revisions')->name('courses.revisions');
+		Route::post('/courses/{course}/revisions', 'CoursesController@updateRevisions')->name('courses.update.revisions');
+		Route::get('/courses/{course}/files', 'CoursesController@files')->name('courses.files');
+		Route::post('/courses/{course}/files', 'CoursesController@updateFiles')->name('courses.update.files');
 		Route::get('/courses/archived', 'CoursesController@archived')->name('courses.archived');
 		Route::resource('courses', 'CoursesController');
 		// Grading

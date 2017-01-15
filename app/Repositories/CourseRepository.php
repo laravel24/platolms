@@ -77,7 +77,7 @@ class CourseRepository extends Repository
 	 */
 	public function createCourse(array $entityData)
 	{
-        unset($entityData['subjects']);
+        unset($entityData['tags']);
 		return $this->create($this->table, $entityData);
 	}
 

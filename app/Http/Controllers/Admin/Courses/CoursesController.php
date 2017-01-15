@@ -47,7 +47,8 @@ class CoursesController extends Controller
 	{
 		$menuTab = $this->menuTab;
 		$subjects = \App\Models\Subject::pluck('name', 'id');
-	    return response()->view('admin.courses.courses.create', compact(['menuTab', 'subjects']));
+		$tags = \App\Models\CourseTag::pluck('name', 'id');
+	    return response()->view('admin.courses.courses.create', compact(['menuTab', 'subjects', 'tags']));
 	}
 
 	/**
@@ -59,6 +60,10 @@ class CoursesController extends Controller
 	{
         $validator = $this->validate($request, [
         	'title' => 'required',
+        	'slug' => 'required',
+        	'level' => 'required',
+        	'number' => 'required',
+        	'subject_id' => 'required',
         	'description' => 'required',
         ]);
 
@@ -69,7 +74,7 @@ class CoursesController extends Controller
         	try{
 
         		$course = \App\Models\Course::find($newCourse);
-	            $course->subjects()->syncWithoutDetaching($request->subjects);
+	            $course->tags()->syncWithoutDetaching($request->tags);
 
 	        } catch(\Exception $exception)
 	        {
@@ -96,7 +101,8 @@ class CoursesController extends Controller
 		$course = $this->repository->getCourse($id);
 		$menuTab = $this->menuTab;
 		$subjects = \App\Models\Subject::pluck('name', 'id');
-		return response()->view('admin.courses.courses.edit', compact(['course', 'menuTab', 'subjects']));
+		$tags = \App\Models\CourseTag::pluck('name', 'id');
+		return response()->view('admin.courses.courses.edit', compact(['course', 'menuTab', 'subjects', 'tags']));
 	}
 
 	/**
@@ -121,7 +127,154 @@ class CoursesController extends Controller
 
         // returns back with success message
         flash()->success('The course was updated!');
-        return redirect()->action('Admin\Courses\CourseController@edit', ['course' => $id]);
+        return redirect()->action('Admin\Courses\CoursesController@edit', ['course' => $id]);
+	}
+
+	/**
+	 * Get the options page
+	 *
+	 * @return Response
+	 */
+	public function options($id)
+	{
+		$course = $this->repository->getCourse($id);
+		$menuTab = $this->menuTab;
+		$courses = $this->repository->getCourses();
+		$coursesAsArray = [];
+		foreach ($courses as $item)
+		{
+			if ($item->id != $id)
+			{
+				$coursesAsArray[$item->id] = $item->subject->abbr . $item->number . ': ' . $item->title;
+			}
+		}
+		$courseOptions = collect($this->getExtraCourseOptions());
+
+		if ($course->options)
+		{
+			$courseOptions = json_decode($course->options);
+			$courseOptions = collect($courseOptions);
+		}
+
+		return response()->view('admin.courses.courses.options', compact(['course', 'menuTab', 'coursesAsArray', 'courseOptions']));
+	}
+
+	/**
+	 * Update the course options 
+	 *
+	 * @return Response
+	 */
+	public function updateOptions(Request $request, $id)
+	{
+        $validator = $this->validate($request, [
+        	//
+        ]);
+
+        try
+        {
+
+        	if ($request->prereqs)
+        	{
+	    		$course = \App\Models\Course::find($id);
+	            $course->prerequisites()->syncWithoutDetaching($request->prereqs);
+        	}
+
+        } catch(\Exception $exception)
+        {
+            $this->flashErrorAndReturnWithMessage($exception);
+        }
+
+        try
+        {
+
+        	$courseOptions = [];
+        	$options = $this->getExtraCourseOptions();
+        	foreach ($options as $key => $value)
+        	{
+	        	if ($request->$key)
+	        	{
+	        		$courseOptions[$key] = $request->$key;
+	        	}
+        	}
+
+    		$courseOptions = json_encode($courseOptions);
+			\App\Models\Course::where('id', $id)
+			          ->update(['options' => $courseOptions]);
+
+        } catch(\Exception $exception)
+        {
+            $this->flashErrorAndReturnWithMessage($exception);
+        }
+
+        // returns back with success message
+        flash()->success('The course options were updated!');
+        return redirect()->action('Admin\Courses\CoursesController@options', ['course' => $id]);   		
+	}
+
+	/**
+	 * Get the scheduling page
+	 *
+	 * @return Response
+	 */
+	public function scheduling($id)
+	{
+		$course = $this->repository->getCourse($id);
+		$menuTab = $this->menuTab;
+		return response()->view('admin.courses.courses.scheduling', compact(['course', 'menuTab']));
+	}
+
+	/**
+	 * Update the course scheduling 
+	 *
+	 * @return Response
+	 */
+	public function updateScheduling(Request $request, $id)
+	{
+		dd($request);
+	}
+	
+	/**
+	 * Get the revisions page
+	 *
+	 * @return Response
+	 */
+	public function revisions($id)
+	{
+		$course = $this->repository->getCourse($id);
+		$menuTab = $this->menuTab;
+		return response()->view('admin.courses.courses.revisions', compact(['course', 'menuTab']));
+	}
+
+	/**
+	 * Update the course revisions 
+	 *
+	 * @return Response
+	 */
+	public function updateRevisions(Request $request, $id)
+	{
+		dd($request);
+	}	
+
+	/**
+	 * Get the files page
+	 *
+	 * @return Response
+	 */
+	public function files($id)
+	{
+		$course = $this->repository->getCourse($id);
+		$menuTab = $this->menuTab;
+		return response()->view('admin.courses.courses.files', compact(['course', 'menuTab']));
+	}
+
+	/**
+	 * Update the course files 
+	 *
+	 * @return Response
+	 */
+	public function updateFiles(Request $request, $id)
+	{
+		dd($request);
 	}
 
 	/**
@@ -141,6 +294,11 @@ class CoursesController extends Controller
         }
 
         return response('Excellent!', 200);
+	}
+
+	public function getExtraCourseOptions()
+	{
+		return ['other_prerequisites' => '', 'public_notes' => '', 'internal_notes' => ''];
 	}
 
 }
