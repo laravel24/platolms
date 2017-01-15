@@ -52,4 +52,12 @@ class Course extends Model
     {
         return $this->belongsToMany('App\Models\CourseTag', 'courses_tags');
     }
+
+    /**
+     * Get the prerequiste courses of the course
+     */
+    public function prerequisites()
+    {
+        return $this->belongsToMany('App\Models\Course', 'courses_prerequisites', 'course_id', 'course_prerequisite_id');
+    }
 }
