@@ -118,6 +118,7 @@ class UsersController extends Controller
         {
         	$roles = $request['roles'];
 	        unset($request['roles']);
+	        $request['display_name'] = $request->first . ' ' . $request->last;
         	$newUser = $this->repository->createUser($request->all());
 
         	if ($newUser)
