@@ -221,8 +221,11 @@ class CoursesController extends Controller
 		$course = $this->repository->getCourse($id);
 		$menuTab = $this->menuTab;
 		$semesters = \App\Models\Semester::pluck('title', 'id');
-		$campuses = \App\Models\Campus::pluck('title', 'id');
-		return response()->view('admin.courses.courses.scheduling', compact(['course', 'menuTab', 'semesters', 'campuses']));
+		$campuses = \App\Models\Campus::get();
+		$instructors = \App\Models\User::whereHas('roles', function($q){
+		        	$q->where('name', '=', env('INSTRUCTOR_LABEL', 'Instructor'));
+		    	})->get();
+		return response()->view('admin.courses.courses.scheduling', compact(['course', 'menuTab', 'semesters', 'campuses', 'instructors']));
 	}
 
 	/**

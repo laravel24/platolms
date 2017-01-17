@@ -130,4 +130,14 @@ class CampusesController extends Controller
         return response('Excellent!', 200);
 	}
 
+	public function getBuildings(Request $request)
+	{
+        $validator = $this->validate($request, [
+        	'campus' => 'required',
+        ]);
+
+        return response()->json(['success' => true, 'campus' => $request->campus]);
+	}
+
+
 }

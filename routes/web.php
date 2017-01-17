@@ -68,6 +68,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 	Route::group(['namespace' => 'Resources', 'as' => 'admin.'], function () 
 	{
 		// Campuses
+		Route::post('campuses/getbuildings', 'CampusesController@getBuildings')->name('getbuildingsbycampus');
 		Route::resource('campuses', 'CampusesController');
 		// Buildings
 		Route::resource('buildings', 'BuildingsController');
