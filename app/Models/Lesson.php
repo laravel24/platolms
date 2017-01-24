@@ -37,4 +37,20 @@ class Lesson extends Model
      */
     protected $dates = [];
 
+    /**
+     * Get the lessons within a course
+     */
+    public function courses()
+    {
+        return $this->hasMany('App\Models\Course');
+    }
+
+    /**
+     * Get the modules within a lesson
+     */
+    public function modules()
+    {
+        return $this->hasMany('App\Models\Module');
+    }
+
 }

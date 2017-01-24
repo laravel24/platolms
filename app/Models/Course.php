@@ -60,4 +60,12 @@ class Course extends Model
     {
         return $this->belongsToMany('App\Models\Course', 'courses_prerequisites', 'course_id', 'course_prerequisite_id');
     }
+
+    /**
+     * Get the lessons within a course
+     */
+    public function lessons()
+    {
+        return $this->hasMany('App\Models\Lesson');
+    }
 }
