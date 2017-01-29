@@ -42,6 +42,9 @@ ADMIN_NAME=Aristotle
 PORTAL_URI=socrates
 PORTAL_NAME=SOCRATES
 
+SCHOOL_TYPE=university
+SCHOOL_NAME="University of Athens"
+
 FILESYSTEM=
 
 SITE_NAME=PlatoLMS
