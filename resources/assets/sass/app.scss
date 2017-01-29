@@ -1,6 +1,6 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Bitter|Varela+Round);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:400,500,800);
 
 // Variables
 @import "variables";
@@ -15,10 +15,12 @@
 
 body {
 	background:$dark-blue;
+	font-family: $font-family-body;
+	font-weight: $font-weight-body-regular;
 }
 
 h1,h2,h3,h4,h5,h6 {
-	font-family: $font-family-serif;
+	font-family: $font-family-heading;
 }
 
 p {
@@ -38,6 +40,10 @@ p {
 // Bootstrap Overrides
 .panel {
 	border-radius: 0px;
+}
+
+.btn {
+	font-size:13px;
 }
 
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
@@ -67,7 +73,7 @@ p {
 	}
 
 	.navbar-brand {
-		font-family: $font-family-serif;
+		font-family: $font-family-heading;
 		font-weight:600;
 	    letter-spacing: 2px;
 	    text-transform: uppercase;
@@ -134,6 +140,7 @@ p {
     h5 {
 	    padding-left: 15px;
 	    padding-right: 15px;
+	    text-transform: uppercase;
     }
 
     .list-group {
@@ -142,6 +149,7 @@ p {
     		background: transparent;
     		border: none;
     		color:#98a6ad;
+    		padding:2px 15px;
 
     		&:hover {
 	    		background:$darker-blue;
