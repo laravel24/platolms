@@ -7972,6 +7972,12 @@ p {
   padding: 25px;
   margin-left: -25px;
   margin-right: -25px; }
+  .page-header .page-header-menu {
+    margin-top: -7px; }
+    .page-header .page-header-menu .page-header-button {
+      margin-left: 10px;
+      font-size: 70%;
+      font-weight: 700; }
 
 .panel {
   border-radius: 0px; }
