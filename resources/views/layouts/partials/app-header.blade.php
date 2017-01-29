@@ -7,8 +7,12 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>PlatoLMS</title>
+    <?php 
+        // Setup Some Environment Vars as PHP vars to use w/in Blade
+        $siteName = env('SITE_NAME');
+        $schoolName = env('SCHOOL_NAME');
+    ?>
+    <title>@if (isset($schoolName) && ($schoolName != '')) {{ $schoolName }} @elseif (isset($siteName) && ($siteName != '')) {{ $siteName }} @else PlatoLMS @endif</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
@@ -36,11 +40,12 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <?php $siteName = env('SITE_NAME'); ?>
-                    @if (isset($siteName))
-                        {{ env('SITE_NAME') }}
-                    @else
-                        <img src="{!! asset('/img/icons/plato-icon.png') !!}"> Plato<span>LMS</span>
+                    @if (isset($schoolName) && ($schoolName != '')) 
+                        {{ $schoolName }} 
+                    @elseif (isset($siteName) && ($siteName != '')) 
+                        {{ $siteName }} 
+                    @else 
+                        PlatoLMS 
                     @endif
                 </a>
             </div>
