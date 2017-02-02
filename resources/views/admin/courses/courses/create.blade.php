@@ -65,7 +65,7 @@
                     if (!value) return '';
                     value = value.trim();
                     value = value.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-                    return value.split(' ').join('').toLowerCase();
+                    return value.split(' ').join('-').toLowerCase();
                 }
             },
             methods: {
@@ -73,7 +73,7 @@
                     if (!value) return '';
                     value = value.trim();
                     value = value.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-                    return value.split(' ').join('').toLowerCase();
+                    return value.split(' ').join('-').toLowerCase();
                 }
             }
         })

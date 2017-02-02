@@ -43,3 +43,9 @@ Vue.http.interceptors.push((request, next) => {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+/**
+ * Import Vue Components
+ */
+import Multiselect from 'vue-multiselect';
+Vue.component('multiselect',Multiselect);

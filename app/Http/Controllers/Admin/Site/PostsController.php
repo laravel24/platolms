@@ -47,10 +47,12 @@ class PostsController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function create(Request $request)
+	public function create()
 	{
 		$menuTab = $this->menuTab;
-	    return response()->view('admin.site.posts.create', compact(['menuTab', 'request']));
+		$tags = \App\Models\Tag::get()->toJson();
+		$categories = \App\Models\Category::get()->toJson();
+	    return response()->view('admin.site.posts.create', compact(['menuTab', 'tags', 'categories']));
 	}
 
 	/**

@@ -41,7 +41,7 @@
             el: '#page-content',
             data: {
                 name: 'Vue.js',
-                collegeName: "<?php echo $college->name; ?>",
+                collegeName: "<?php echo $college->name; ?>"
             },
             // http: {
             //         emulateJSON: true,
@@ -57,7 +57,7 @@
                     if (!value) return '';
                     value = value.trim();
                     value = value.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-                    return value.split(' ').join('').toLowerCase();
+                    return value.split(' ').join('-').toLowerCase();
                 }
             },
             methods: {
@@ -65,7 +65,7 @@
                     if (!value) return '';
                     value = value.trim();
                     value = value.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-                    return value.split(' ').join('').toLowerCase();
+                    return value.split(' ').join('-').toLowerCase();
                 }
             }
         })

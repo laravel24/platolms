@@ -37,4 +37,12 @@ class Tag extends Model
      */
     protected $dates = [];
 
+    /**
+     * Get the posts in a tag
+     */
+    public function posts()
+    {
+        return $this->belongsToMany('App\Models\Post');
+    }
+    
 }

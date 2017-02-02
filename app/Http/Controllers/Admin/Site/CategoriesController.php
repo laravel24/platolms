@@ -89,7 +89,7 @@ class CategoriesController extends Controller
 	}
 
 	/**
-	 * Update the post
+	 * Update the category
 	 *
 	 * @return Response
 	 */
@@ -101,7 +101,7 @@ class CategoriesController extends Controller
 
         try
         {
-        	$updatedUser = $this->repository->updateCategory($id, $request->all());
+        	$updatedCategory = $this->repository->updateCategory($id, $request->all());
 
         } catch(\Exception $exception)
         {

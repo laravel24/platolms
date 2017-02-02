@@ -74,8 +74,8 @@ $thisYear = \Carbon\Carbon::now()->year;
                                         {!! Form::submit('Submit', ['class' => 'btn btn-sm btn-success pull-right']) !!}
                                     @endif
                                 </div><!-- /.panel-footer -->
-                            {!! Form::close() !!}
-                        </div>
+                            </div>
+                        {!! Form::close() !!}
                     </div>
                     <div class="{{ getColumns(9) }}">
                         <div class="semesters-div">
