@@ -136,7 +136,15 @@ class CampusesController extends Controller
         	'campus' => 'required',
         ]);
 
-        return response()->json(['success' => true, 'campus' => $request->campus]);
+        $returnedBuildings = [];
+       	$buildings = \App\Models\Building::where('campus_id', $request->campus)->get();
+
+       	foreach ($buildings as $building)
+       	{
+       		$returnedBuildings[] = ['name' => $building->title, 'id' => $building->id];
+       	}
+
+        return response()->json($returnedBuildings);
 	}
 
 

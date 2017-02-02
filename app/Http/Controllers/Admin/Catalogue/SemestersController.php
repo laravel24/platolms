@@ -33,20 +33,12 @@ class SemestersController extends Controller
 	 */
 	public function index()
 	{
-		$semesters = $this->repository->getSemesters();
+		$semesters = \App\Models\Semester::orderBy('start', 'desc')->get();
+		$semestersByYear = $semesters->groupBy(function($item,$key) {
+			return substr($item['start'], 0, 4);
+		});
 		$menuTab = $this->menuTab;
-		return response()->view('admin.catalogues.semesters.index', compact(['semesters', 'menuTab']));
-	}
-
-	/**
-	 * Show an page to create a Semester
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		$menuTab = $this->menuTab;
-	    return response()->view('admin.catalogues.semesters.create', compact(['menuTab']));
+		return response()->view('admin.catalogues.semesters.index', compact(['semestersByYear', 'menuTab']));
 	}
 
 	/**
@@ -83,9 +75,13 @@ class SemestersController extends Controller
 	 */
 	public function edit($id)
 	{
-		$semester = $this->repository->getSemester($id);
+		$editSemester = $this->repository->getSemester($id);
 		$menuTab = $this->menuTab;
-		return response()->view('admin.catalogues.semesters.edit', compact(['semester', 'menuTab']));
+		$semesters = \App\Models\Semester::orderBy('start', 'desc')->get();
+		$semestersByYear = $semesters->groupBy(function($item,$key) {
+			return substr($item['start'], 0, 4);
+		});
+		return response()->view('admin.catalogues.semesters.index', compact(['semestersByYear', 'editSemester', 'menuTab']));
 	}
 
 	/**
