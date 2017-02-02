@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Courses;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\TestingRepository as TestingRepository;
+use App\Repositories\TestRepository as TestRepository;
 
 class TestingsController extends Controller
 {
@@ -20,7 +20,7 @@ class TestingsController extends Controller
 	 *
 	 * @return void
 	 */
-	public function __construct(TestingRepository $testingRepo)
+	public function __construct(TestRepository $testingRepo)
 	{
 		$this->repository = $testingRepo;
 		$this->menuTab = 'testings';
