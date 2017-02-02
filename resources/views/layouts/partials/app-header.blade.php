@@ -25,7 +25,8 @@
         ]); ?>
     </script>
 </head>
-<body>
+
+<body class="@if (isset($overlay)) modal-open @else @endif">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="">
             <div class="navbar-header">

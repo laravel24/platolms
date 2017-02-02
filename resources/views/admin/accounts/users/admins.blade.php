@@ -32,7 +32,6 @@
         @include('layouts.partials.flash')      
 
         <div class="content-box">
-
             @include('admin.accounts.users.partials.usertable')
         </div>
     </div>

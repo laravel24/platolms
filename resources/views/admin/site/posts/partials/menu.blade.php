@@ -1,6 +1,7 @@
-        <div class="sub-menu">
-            <ul class="breadcrumb">
-                <li><a href="{{ route('admin.posts.index') }}">All Posts</a></li>
-                <li><a href="{{ route('admin.posts.create') }}">Create New Post</a></li>
-            </ul>
-        </div>
+<span class="pull-right page-header-menu">
+    <small>
+        <span class="page-header-button">
+            <a class="btn btn-success" href="{{ route('admin.posts.create') }}"><i class="fa fa-pencil"></i> &nbsp; New Post</a>
+        </span>
+    </small>
+</span>

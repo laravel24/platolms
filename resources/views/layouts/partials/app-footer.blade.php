@@ -17,5 +17,9 @@
 
     @yield('scripts')
 
+@if (isset($overlay)) 
+	<div class="modal-backdrop fade in">
+@endif
+
 </body>
 </html>

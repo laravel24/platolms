@@ -12,6 +12,9 @@
 @import "vendor/fort-awesome-sass/font-awesome";
 
 // Styles
+@import "tables";
+@import "buttons";
+@import "forms";
 
 body {
 	background:$dark-blue;
@@ -407,4 +410,87 @@ p {
 
 .mr40 {
 	margin-right:40px !important;
+}
+
+.overlay {
+	opacity: .4;
+
+	.overlay-feature {
+		opacity: 1
+	}
+}
+
+
+
+.semesters-div {
+	h3 {
+		margin-top:0px;
+	}
+
+	.semester {
+		margin-bottom: 50px;
+
+		.semester-list {
+
+			.semester-item {
+				overflow: auto;
+				margin-bottom: 10px;
+				padding-bottom: 10px;
+				border-bottom: 1px solid #ececec;
+				background: #f9f9f9;
+				padding-top: 10px;
+
+				.semester-item-name {
+					font-size:16px;
+					font-weight:800;
+
+					.description {
+						font-weight:400;
+					}
+
+				}
+
+				.semester-item-actions {
+					padding-top: 10px;
+				}
+			}
+		}
+	}
+}
+
+.panel {
+	border-color: #ececec;
+}
+
+.panel-heading {
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
+
+	p {
+		margin-bottom:0px;
+	}
+}
+
+.panel-muted {
+
+	.panel-heading {
+		background-color:#fff;
+		border-color: #d6e9c6;
+	}
+}
+
+.panel-warning, .panel-success, .panel-muted {
+
+	.panel-title {
+		color:$paragraph-color
+	}
+
+	.panel-footer {
+		background:#fff;
+		overflow: auto;
+
+		.btn {
+			font-family: $font-family-heading;
+		}
+	}
 }

@@ -12,6 +12,8 @@
             </span>
         </h2>
 
+        <a href="{{ route('admin.buildings.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'buildings')) active @endif">Buildings</a>
+        <a href="{{ route('admin.rooms.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'rooms')) active @endif">Rooms</a>
         @include('layouts.partials.flash')      
 
         @if (count($campuses) > 0)

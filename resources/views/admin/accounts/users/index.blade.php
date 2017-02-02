@@ -14,9 +14,6 @@
         <h2 class="page-header mb30">All {{ $title }}
             <span class="pull-right">
                 <small>
-                    <span style="font-size:70%;font-weight:700;">
-                           <a href="{{ route('admin.users.search') }}"><i class="fa fa-user"></i> &nbsp; {{ $title }} Search</a>
-                    </span>
                     <span style="margin-left:15px;font-size:70%;font-weight:700;">
                            <a href="{{ route('admin.users.archived') }}"><i class="fa fa-user"></i> &nbsp; Archived {{ $title }}s</a>
                     </span>
