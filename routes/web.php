@@ -23,8 +23,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 	{
 		// Invoices
 		Route::resource('invoices', 'InvoicesController');
-		// Roles
-		Route::resource('roles', 'RolesController');
 		// Students
 		Route::get('/students/search', 'StudentsController@search')->name('students.search');
 		Route::get('/students/archived', 'StudentsController@archived')->name('students.archived');
@@ -68,7 +66,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 	Route::group(['namespace' => 'Resources', 'as' => 'admin.'], function () 
 	{
 		// Campuses
-		Route::post('campuses/getbuildings', 'CampusesController@getBuildings')->name('getbuildingsbycampus');
+		Route::post('/campuses/getbuildings', 'CampusesController@getBuildings')->name('getbuildingsbycampus');
 		Route::resource('campuses', 'CampusesController');
 		// Buildings
 		Route::resource('buildings', 'BuildingsController');
@@ -94,11 +92,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => env('ADMIN_URI'), 'middleware'
 		// Minors
 		Route::get('/minors/archived', 'MinorsController@archived')->name('minors.archived');
 		Route::resource('minors', 'MinorsController');
-		// Plans
-		Route::get('/semesters/archived', 'SemestersController@archived')->name('semesters.archived');
-		Route::resource('plans', 'PlansController');
 		// Semesters
-		Route::get('/semesters/archived', 'SemestersController@archived')->name('semesters.archived');
+		Route::get('/settings/schedule', 'SemestersController@index')->name('settings.schedules.index');
 		Route::resource('semesters', 'SemestersController');
 	});
 
