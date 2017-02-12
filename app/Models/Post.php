@@ -23,7 +23,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'slug', 'content', 'img', 'video',
+        'title', 'slug', 'content', 'img', 'video', 'scheduled_for', 'type', 'author'
     ];
 
     /**
@@ -41,11 +41,21 @@ class Post extends Model
     protected $dates = [
         'deleted_at',
     ];
+
     /**
      * Get the categories attached to a post
      */
     public function categories()
     {
-        return $this->hasOne('App\Models\Category');
+        return $this->belongsToMany('App\Models\Category', 'category_post', 'post_id', 'category_id');
     }
+
+    /**
+     * Get the tags attached to a post
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag', 'post_tag', 'post_id', 'tag_id');
+    }
+
 }

@@ -41,5 +41,13 @@ return [
         'user_archive_limit' => 30,    
     ],
 
+    'post' => [
+        /*
+        | User Image Resize
+        |--------------------------------------------------------------------------
+        | Here you can customize the pixel value \used when resizing profile images.
+        */
+        'post_image_resize' => 600, 
+    ],
 
 ];

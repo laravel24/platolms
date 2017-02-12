@@ -1,6 +1,6 @@
 <div class="main-sidebar">
     <h5>Administration</h5>
-	<div class="list-group">
+    <div class="list-group">
         <a href="{{ route('admin.admins.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'users')) active @endif">Admins</a>
         <a href="{{ route('admin.students.index') }}" class="list-group-item @if (isset($menuTab) && ($menuTab == 'users')) active @endif">Students</a>
     </div>

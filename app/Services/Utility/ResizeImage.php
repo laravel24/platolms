@@ -26,7 +26,7 @@ class ResizeImage
      *
      * @return void
      */
-    public function resizeImage($file, $path)
+    public function resizeUserImage($file, $path)
     {
 
        try {
@@ -41,7 +41,7 @@ class ResizeImage
 			$image = \Image::make($path . $file);
 			
 			// resize img instance
-			$image->resize(Config::get('settings.user_image_resize'), Config::get('settings.user_image_resize'));
+			$image->resize(\Config::get('settings.user.user_image_resize'), \Config::get('settings.user.user_image_resize'));
 			
 			// save img in desired format
 			$image->save($path . 'resized/' . $file);
@@ -56,5 +56,41 @@ class ResizeImage
         } // end try/catch      
 
     }
-    
+
+
+    /**
+     * The service provider to handle avatar uploads
+     *
+     * @return void
+     */
+    public function resizePostImage($file, $path)
+    {
+
+       try {
+
+            // check for a resized img
+            if (!File::isDirectory($path . 'resized/') and $path . 'resized/') 
+            {
+                File::makeDirectory($path . 'resized/', 0777, true);
+            }
+
+            // open an img file
+            $image = \Image::make($path . $file);
+            
+            // resize img instance
+            $image->resize(\Config::get('settings.post.post_image_resize'), \Config::get('settings.post.post_image_resize'));
+            
+            // save img in desired format
+            $image->save($path . 'resized/' . $file);
+
+            // return the filename in a string format
+            return $path . 'resized/' . $file;
+            
+        } catch(Exception $e) {
+
+            throw $e;
+
+        } // end try/catch      
+
+    }    
 }

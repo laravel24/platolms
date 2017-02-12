@@ -37,16 +37,21 @@
                         <div class="form-group">
                             <label for="content">Content</label><br/>
                             <div style="font-weight:normal;font-family:'Helvetica Neue'">
-                                {!! Form::textarea('content', '', ['required', 'id' => 'content', 'placeholder' => '', 'class' => 'form-control']) !!}
+                                {!! Form::textarea('content', '', ['optional', 'id' => 'content', 'placeholder' => '', 'class' => 'form-control']) !!}
                             </div>
                         </div>
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Featured Image</h3>
+                                <h3 class="panel-title">Featured Image</h3>
                             </div><!-- /.panel-heading -->
                             <div class="panel-body">
-                                <p>Add Featured Image</p>
+
+                                <div v-if="image">
+                                    <img class="responsive" :src="image" />
+                                    <a class="btn btn-success" v-on:click.prevent="removeImage">Remove image</a>
+                                </div>                                
+                                <input type="file" name="featured_image" @change="onFileChange">
                             </div><!-- .panel-body -->
                         </div>
 
@@ -56,49 +61,77 @@
 
                         <div class="panel panel-warning">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Publish Info</h3>
+                                <h3 class="panel-title">Publish Info</h3>
                             </div><!-- /.panel-heading -->
                             <div class="panel-body">
-                                <p>Schedule the post </p>
+                                <span>Status:</span> Draft<br/>
+                                <div class="pull-left">
+                                    <span>Publish:</span> <span v-if="!changePublishingDateClicked">Immediately</span><span v-if="changePublishingDateClicked">Another Date</span>
+                                </div>
+                                <div class="pull-right">
+                                    <div v-if="!changePublishingDateClicked">
+                                        <a class="btn-link" v-on:click.prevent="changePublishingDateClicked = !changePublishingDateClicked">Change</a>
+                                    </div>
+                                    <div v-if="changePublishingDateClicked">
+                                        <a class="btn-link" v-on:click.prevent="changePublishingDateClicked = !changePublishingDateClicked">Cancel</a>
+                                    </div>
+                                </div>
+                                <div class="row mt30" v-if="changePublishingDateClicked">
+                                    <div class="{{ getColumns(5) }}">
+                                        <multiselect v-model="postMonth" :options="months" select-label="" :searchable="false" :close-on-select="true" placeholder="{{ date('M') }}" label="title" track-by="id"></multiselect>
+                                        <input type="hidden" name="post_month" v-model="postMonth">
+                                    </div>
+                                    <div class="{{ getColumns(3) }}">
+                                        {!! Form::text('day', '', ['id' => 'day', 'placeholder' => date('d'), 'class' => 'form-control']) !!}
+                                    </div>
+                                    <div class="{{ getColumns(4) }}">
+                                        {!! Form::text('year', '', ['id' => 'year', 'placeholder' => date('Y'), 'class' => 'form-control']) !!}
+                                    </div>
+                                </div>
                             </div><!-- .panel-body -->
                             <div class="panel-footer">
+                                {!! Form::submit('Save Draft', ['class' => 'btn btn-default pull-left']) !!}
                                 {!! Form::submit('Submit', ['class' => 'btn btn-success pull-right']) !!}
                             </div><!-- /.panel-footer -->
                         </div>
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Post Type</h3>
+                                <h3 class="panel-title">Post Type</h3>
                             </div><!-- /.panel-heading -->
                             <div class="panel-body">
-                                <p>Pick post type</p>
+                                <multiselect v-model="postType" :options="types" :searchable="false" :close-on-select="true" placeholder="Pick a value" label="title" track-by="id"></multiselect>
+                                <input type="hidden" name="post_type" v-model="postType">
                             </div><!-- .panel-body -->
                         </div>
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Categories</h3>
+                                <h3 class="panel-title">Categories</h3>
                             </div><!-- /.panel-heading -->
                             <div class="panel-body">
                                 <multiselect v-model="postCategories" :options="categories" :multiple="true" :close-on-select="true" :clear-on-select="true" :hide-selected="true" placeholder="Pick some" label="title" track-by="id"></multiselect>
+                                <input type="hidden" name="post_categories" v-model="postCategories">
                             </div><!-- .panel-body -->
                         </div>
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Tags</h3>
+                                <h3 class="panel-title">Tags</h3>
                             </div><!-- /.panel-heading -->
                             <div class="panel-body">
                                 <multiselect v-model="postTags" :options="tags" :multiple="true" :close-on-select="true" :clear-on-select="true" :hide-selected="true" placeholder="Pick some" label="title" track-by="id"></multiselect>
+                                <input type="hidden" name="post_tags" v-model="postTags">
                             </div><!-- .panel-body -->
                         </div>
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Author</h3>
+                                <h3 class="panel-title">Author</h3>
                             </div><!-- /.panel-heading -->
                             <div class="panel-body">
-                                <p>Pick Author</p>
+                                <multiselect v-model="postAuthor" :options="authors" :searchable="false" :close-on-select="true" placeholder="Pick a value" label="display_name" track-by="id"></multiselect>
+                                <input type="hidden" name="post_author" v-model="postAuthor">
                             </div><!-- .panel-body -->
                         </div>
 
@@ -128,11 +161,19 @@
             el: '#page-content',
             data: {
                 name: 'Vue.js',
+                changePublishingDateClicked: false,
                 postName: '',
+                image: '',
+                postType: '',
+                types: {!! $postTypes !!},
                 postCategories: '',
                 categories: {!! $categories !!},
                 postTags: '',
-                tags: {!! $tags !!}
+                tags: {!! $tags !!},
+                postAuthor: '',
+                authors: {!! $authors !!},
+                postMonth: '',
+                months: {!! $months !!},
             },
             // http: {
             //         emulateJSON: true,
@@ -141,6 +182,9 @@
             computed: {
                 slug: function () {
                     return this.slugifyTitle(this.postName);
+                },
+                createdImage: function() {
+                    return this.image;
                 }
             },
             filters: {
@@ -157,6 +201,26 @@
                     value = value.trim();
                     value = value.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
                     return value.split(' ').join('-').toLowerCase();
+                },
+                onFileChange(e) {
+                    var files = e.target.files || e.dataTransfer.files;
+                    if (!files.length)
+                        return;
+                    console.log(this.createImage(files[0]))
+                    this.createImage(files[0]);
+                },
+                createImage(file) {
+                    var image = new Image();
+                    var reader = new FileReader();
+                    var vm = this;
+
+                    reader.onload = (e) => {
+                        vm.image = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                },
+                removeImage: function (e) {
+                    this.image = '';
                 }
             }
         })

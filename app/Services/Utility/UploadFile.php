@@ -39,9 +39,9 @@ class UploadFile
 
             $this->cleanOutFolder($path);
 
-            $userImage = $this->upload($file, 'uploads/' . $id . '/avatar/', 'public');            
+            $userImage = $this->upload($file, 'uploads/users/' . $id . '/avatar/', 'public');            
 
-            $this->resize->resizeImage($userImage, $path);
+            $this->resize->resizeUserImage($userImage, $path);
 
             // return the filename in a string format
             return $userImage;
@@ -53,6 +53,34 @@ class UploadFile
         } // end try/catch      
 
     }
+
+    /**
+     * The service provider to handle avatar uploads
+     *
+     * @return void
+     */
+    public function uploadSiteContentImage($datePath, $file)
+    {
+
+       try {
+
+            // Set the path
+            $path = storage_path() . '/app/uploads/' . $datePath;
+
+            $siteImage = $this->upload($file, 'uploads/' . $datePath, 'public');            
+
+            $this->resize->resizePostImage($siteImage, $path);
+
+            // return the filename in a string format
+            return $siteImage;
+            
+        } catch(Exception $e) {
+            
+            throw $e;
+            
+        } // end try/catch      
+
+    }    
 
     /**
      * The service provider to handle avatar uploads

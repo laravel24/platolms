@@ -10,7 +10,7 @@
                             @foreach ($posts as $post)
 
                                 <tr>
-                                    <td><a href="">{{ $post->name }}</a></td>
+                                    <td><a href="">{{ $post->title }}</a></td>
                                 </tr>
 
                             @endforeach
