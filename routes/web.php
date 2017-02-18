@@ -215,5 +215,19 @@ Route::get('avatars/r/{id}/{img}', function ($id, $img) {
     return \Image::make($path . $img)->response();
 });
 
+// Post Image Routes
+Route::get('posts/{year}/{month}/{day}/{img}', function ($year, $month, $day, $img) {
+    return \Image::make(storage_path() . '/app/uploads/posts/' . $year . '/' . $month . '/' . $day .'/' . $img)->response();
+});
+
+Route::get('posts/r/{year}/{month}/{day}/{img}', function ($year, $month, $day, $img) {
+    $path = storage_path() . '/app/uploads/posts/' . $year . '/' . $month . '/' . $day .'/';
+	if (File::isDirectory($path . 'resized/') and $path . 'resized/') 
+	{
+	    return \Image::make($path . 'resized/' . $img)->response();
+	}
+    return \Image::make($path . $img)->response();
+});
+
 // Auth Routes
 Auth::routes();

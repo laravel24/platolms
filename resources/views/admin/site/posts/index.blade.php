@@ -39,3 +39,7 @@
     </div>
 
 @endsection
+
+@section('scripts')
+    @include('admin.site.posts.partials.postscripts')
+@endsection

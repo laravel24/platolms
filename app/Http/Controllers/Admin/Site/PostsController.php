@@ -32,6 +32,8 @@ class PostsController extends Controller
 	public function index(Request $request)
 	{
 		$menuTab = $this->menuTab;
+        $categories = \App\Models\Category::pluck('title');
+        $categoriesGet = \App\Models\Category::get();
 
         if (is_null($request->cat))
         {
@@ -42,7 +44,7 @@ class PostsController extends Controller
 		    	})->paginate();
         }
 
-		return response()->view('admin.site.posts.index', compact(['posts', 'menuTab', 'request']));
+        return response()->view('admin.site.posts.index', compact(['posts', 'categories', 'categoriesGet', 'menuTab', 'request']));
 	}
 
 	/**

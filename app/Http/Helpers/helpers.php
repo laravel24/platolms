@@ -109,7 +109,7 @@
                 return '<img src="' . $img . '" class="' . $class . '" width="'.$size.'" style="'.$style.'">';
 	        } else {
 
-	        	if ($size < Config::get('settings.user_image_resize'))
+	        	if ($size < Config::get('settings.user.user_image_resize'))
 	        	{
 		            return '<img src="/avatars/r/'. $id . '/' . $img . '" width="'.$size.'" class="' . $class . '" style="'.$style.'">';
 	        	}
@@ -124,4 +124,24 @@
 
 		}
 
+	}
+
+	/**
+	 * Gets the image for a post
+	 *
+	 * @return string
+	 * @todo -> move this to the user class
+	 */
+	function getPostImage($id, $date, $img, $size='50', $class='thumbnail media-object', $style='')
+	{
+		$year = date('Y', strtotime($date));
+		$month = date('m', strtotime($date));
+		$day = date('d', strtotime($date));
+
+    	if ($size < Config::get('settings.post.post_image_resize'))
+    	{
+            return '<img src="/posts/r/'. $year . '/' . $month . '/' . $day . '/' . $img . '" width="'.$size.'" class="' . $class . '" style="'.$style.'">';
+    	}
+
+        return '<img src="/posts/'. $year . '/' . $month . '/' . $day . '/' . $img . '" width="'.$size.'" class="' . $class . '" style="'.$style.'">';
 	}

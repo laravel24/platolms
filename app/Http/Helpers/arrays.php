@@ -28,11 +28,11 @@
 	 *
 	 * @return string
 	 */
-	 function getRolesAsStrings()
-	 {
+	function getRolesAsStrings()
+	{
 	 	$roles = getRoles();
 		return implode(",", $roles);
-	 }
+	}
 
 	/**
 	 * Get the types of blogs we can have

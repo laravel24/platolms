@@ -58,4 +58,18 @@ class Post extends Model
         return $this->belongsToMany('App\Models\Tag', 'post_tag', 'post_id', 'tag_id');
     }
 
+    /**
+     * Get the categoires as string
+     */
+    public function getCategories()
+    {
+        $returnedCategories = [];
+        $categories = $this->belongsToMany('App\Models\Category', 'category_post')->orderBy('id')->get();
+        foreach ($categories as $cat)
+        {
+            $returnedCategories[] = $cat->title;
+        }
+        return implode(',', $returnedCategories);
+    }
+
 }
