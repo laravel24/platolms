@@ -5,88 +5,53 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>PlatoLMS</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:400,500,800" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway';
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+        <link href="/landing/css/foundation.min.css" rel="stylesheet" type="text/css">
+        <link href="/landing/styles.css" rel="stylesheet" type="text/css">
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
+         
+        <div class="top-bar">
+            <div class="row">
+                <div class="top-bar-left">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                        <li class="menu-text">PLATO LMS</li>
+                    </ul>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="top-bar-right">
+                    <ul class="menu">
+                        <li><a href="https://github.com/jasonherndon/platolms">Github</a></li>
+                        <li><a href=""></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
+         
+        <div class="row">
+            <div class="medium-8 columns">
+                <div class="title m-b-md">
+                    <span>Open Source</span><br/><span style="color: #6aa7bf;">Enterprise Ready</span><br/>Learning Management Software
+                </div>
+                <div class="sub-title">
+                    Shipping Summer of 2017
+                </div>
+            </div>
+            <div class="medium-4 columns" style="padding-top: 130px;">
+                <img src="/img/plato.gif">
+            </div>
+        </div>
     </body>
+
+    <!-- Scripts -->
+    <script src="/landing/js/vendor/js/jquery.js"></script>
+    <script src="/landing/js/vendor/js/what-input.js"></script>
+    <script src="/landing/js/vendor/js/foundation.min.js"></script>
+
 </html>
 
